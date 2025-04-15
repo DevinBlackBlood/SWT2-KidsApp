@@ -1,0 +1,33 @@
+name: Pre Merge Checks
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        jdk: [24]
+        project:
+          - api-backend
+          - kidsapp-backend
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4.5.0
+        with:
+          java-version: '${{ matrix.jdk }}'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven of ${{ matrix.project }}
+        if: ${{ matrix.project != '' }}
+        working-directory: ${{ matrix.project }}
+        run: mvn --batch-mode --update-snapshots verify
