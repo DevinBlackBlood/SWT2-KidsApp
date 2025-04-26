@@ -1,13 +1,13 @@
-package com.swt1.bs.kidsapp;
+package com.swt1.bs.kidsappbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KidsappApplicationTests {
+class KidsappBackendApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
