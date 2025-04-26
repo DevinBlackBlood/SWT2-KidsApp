@@ -1,7 +1,8 @@
 FROM maven:3.9.9-eclipse-temurin-24-alpine
 # Set the working directory
-WORKDIR /app
+WORKDIR /api-backend
 
-COPY target/*-shaded.jar ./target/app-shaded.jar
+COPY . .
 # Run the application
-CMD ["java", "-jar", "target/app-shaded.jar"]
+CMD ["java", ".src/main/java/com/swt1/bs/apibackend/ApiBackendApplication.java"]
+EXPOSE 8080
