@@ -1,0 +1,13 @@
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - "5431:5432"
+    restart: always
+    environment:
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: korkmaz
+      POSTGRES_DB: kidsapp
+    volumes:
+      - ./postgres:/var/lib/postgres
