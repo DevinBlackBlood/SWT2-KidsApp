@@ -17,6 +17,7 @@ jobs:
         project:
           - api-backend
           - kidsapp-backend
+          - kidsapp-ui
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
