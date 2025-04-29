@@ -22,7 +22,6 @@ jobs:
         project:
           - api-backend
           - kidsapp-backend
-          - kidsapp-ui
     steps:
       - name: Checkout
         uses: actions/checkout@v4
