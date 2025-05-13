@@ -58,7 +58,7 @@ jobs:
           tags: ghcr.io/${{ steps.lower-repo.outputs.repository }}/${{ matrix.project }}:${{ github.sha }}
           labels: ${{ steps.metadata.outputs.labels }}
 
-    build:
+    build-ui:
       runs-on: ubuntu-latest
       name: Build Angular UI (kidsapp-ui)
       permissions:
