@@ -58,9 +58,18 @@ jobs:
           tags: ghcr.io/${{ steps.lower-repo.outputs.repository }}/${{ matrix.project }}:${{ github.sha }}
           labels: ${{ steps.metadata.outputs.labels }}
 
-    build-ui:
+    build:
       runs-on: ubuntu-latest
       name: Build Angular UI (kidsapp-ui)
+      permissions:
+        contents: read
+        packages: write
+      strategy:
+        fail-fast: false
+        matrix:
+          node: [ 20 ]
+          project:
+            - kidsapp-ui
       steps:
         - name: Docker Container Metadata
           id: metadata
@@ -69,13 +78,6 @@ jobs:
             images: ${{ matrix.project }}
         - name: Checkout repository
           uses: actions/checkout@v4
-
-        - name: Setup Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: 20
-            cache: 'npm'
-            cache-dependency-path: kidsapp-ui/package-lock.json
 
         - name: Install
           working-directory: kidsapp-ui
@@ -99,7 +101,7 @@ jobs:
         - name: Build and push Docker image
           uses: docker/build-push-action@v6
           with:
-            context: ${{ matrix.project }} 
+            context: ${{ matrix.project }}
             push: ${{ github.event_name != 'pull_request' }}
             tags: ghcr.io/${{ steps.lower-repo.outputs.repository }}/${{ matrix.project }}:${{ github.sha }}
             labels: ${{ steps.metadata.outputs.labels }}
