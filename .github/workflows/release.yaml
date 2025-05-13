@@ -99,7 +99,7 @@ jobs:
         - name: Build and push Docker image
           uses: docker/build-push-action@v6
           with:
-            context: ${{ matrix.project }}
+            context: ${{ matrix.project }} 
             push: ${{ github.event_name != 'pull_request' }}
             tags: ghcr.io/${{ steps.lower-repo.outputs.repository }}/${{ matrix.project }}:${{ github.sha }}
             labels: ${{ steps.metadata.outputs.labels }}
