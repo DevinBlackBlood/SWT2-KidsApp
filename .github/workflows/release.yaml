@@ -85,16 +85,14 @@ jobs:
           cache: 'npm'
           cache-dependency-path: kidsapp-ui/package-lock.json
 
-      - name: Install
+      - name: Install dependencies
         working-directory: ${{ matrix.project }}
         run: npm ci
 
       - name: Build
-
         run: |
                cd ${{ matrix.project }}
               npm run build
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3.4.0
         with:
