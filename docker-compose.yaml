@@ -1,14 +1,14 @@
 services:
   kidsapp-backend:
-    image:  ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:6c3133b3d5f2443dfd941c4b48e56fb709a11f63
+    image:  ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
     ports:
       - 8081:8081
   api-backend:
-    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:6c3133b3d5f2443dfd941c4b48e56fb709a11f63
+    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
     ports:
       - 8080:8080
   kidsapp-ui:
-    image: ui:latest
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
     ports:
       - 4200:4200
   database:
@@ -23,3 +23,19 @@ services:
       POSTGRES_DB: kidsapp
     volumes:
       - ./postgres:/var/lib/postgres
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    ports:
+      - "1883:1833"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    security_opt:
+      - no-new-privileges:true
