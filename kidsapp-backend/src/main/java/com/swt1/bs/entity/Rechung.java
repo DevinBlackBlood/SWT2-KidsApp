@@ -1,6 +1,7 @@
 package com.swt1.bs.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.swt1.bs.utils.Anschrift;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -13,13 +14,14 @@ import java.sql.Time;
 public class Rechung {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer rechnungsnummer;
 
-    private Anschrifft rechnungsanschrift;
+    private Anschrift rechnungsanschrift;
 
-    private Anschrifft veranstalteranschrift;
+    private Anschrift veranstalteranschrift;
 
     private Time ausstellungszeitpunkt;
 
