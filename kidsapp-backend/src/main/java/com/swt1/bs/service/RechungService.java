@@ -1,5 +1,6 @@
 package com.swt1.bs.service;
 
+import com.swt1.bs.entity.Buchungsformular;
 import com.swt1.bs.entity.Rechung;
 import com.swt1.bs.entity.Ticket;
 import com.swt1.bs.repository.BenutzerRepository;
@@ -20,9 +21,9 @@ public class RechungService {
     //TODO
     public void generieren(Ticket ticket, Buchungsformular buchungsformular) {
 
-        Rechung rechung = new Rechung();
-        LocalTime now = LocalTime.now();
-        rechung.setAusstellungszeitpunkt(Time.valueOf(now));
+//        Rechung rechung = new Rechung();
+//        LocalTime now = LocalTime.now();
+//        rechung.setAusstellungszeitpunkt(Time.valueOf(now));
 
     }
 

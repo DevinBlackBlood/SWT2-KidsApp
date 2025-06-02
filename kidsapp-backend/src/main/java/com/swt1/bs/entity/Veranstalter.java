@@ -1,8 +1,7 @@
 package com.swt1.bs.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.swt1.bs.utils.Adresse;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.List;
 public class Veranstalter {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Adresse adresse;

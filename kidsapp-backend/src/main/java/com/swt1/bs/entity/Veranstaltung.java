@@ -4,6 +4,8 @@ import com.swt1.bs.utils.Adresse;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Veranstaltung {
@@ -12,9 +14,10 @@ public class Veranstaltung {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Embedded
     private Adresse adresse;
+
     private String beschreibung;
+
     private String veranstaltungName;
 
     @OneToMany(mappedBy = "veranstaltung", targetEntity = Benutzer.class)
