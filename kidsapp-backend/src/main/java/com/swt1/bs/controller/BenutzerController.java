@@ -2,7 +2,7 @@ package com.swt1.bs.controller;
 
 import com.swt1.bs.entity.Benutzer;
 import com.swt1.bs.service.BenutzerService;
-import org.springframework.beans.factory.annotation.Autowired;;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
