@@ -3,9 +3,6 @@ package com.swt1.bs.entity;
 import com.swt1.bs.utils.Adresse;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
