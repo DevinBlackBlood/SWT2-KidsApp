@@ -21,7 +21,7 @@ public class Rechung {
 
     private Anschrift rechnungsanschrift;
 
-    private Anschrift veranstalteranschrift;
+    private String veranstalteranschrift;
 
     private Time ausstellungszeitpunkt;
 

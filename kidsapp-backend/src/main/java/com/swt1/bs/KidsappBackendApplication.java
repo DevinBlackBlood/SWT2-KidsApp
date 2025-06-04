@@ -1,4 +1,4 @@
-package com.swt1.bs.kidsappbackend;
+package com.swt1.bs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

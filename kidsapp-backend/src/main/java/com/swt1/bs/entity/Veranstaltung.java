@@ -20,7 +20,7 @@ public class Veranstaltung {
 
     private String veranstaltungName;
 
-    @OneToMany(mappedBy = "veranstaltung", targetEntity = Benutzer.class)
+    @OneToMany(targetEntity = Benutzer.class)
     private List<Benutzer> benutzer;
 
 
