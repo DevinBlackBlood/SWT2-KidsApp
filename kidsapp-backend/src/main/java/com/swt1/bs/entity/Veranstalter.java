@@ -1,5 +1,6 @@
 package com.swt1.bs.entity;
 
+import com.swt1.bs.utils.Adresse;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;

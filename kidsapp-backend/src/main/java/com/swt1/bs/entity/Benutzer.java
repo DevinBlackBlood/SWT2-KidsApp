@@ -1,5 +1,6 @@
 package com.swt1.bs.entity;
 
+import com.swt1.bs.utils.Adresse;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -38,4 +39,6 @@ public class Benutzer {
     @OneToMany(targetEntity = Nachricht.class)
     private List<Nachricht> nachrichten;
 
+    @ManyToMany(targetEntity = Chat.class)
+    private List<Chat> chats;
 }

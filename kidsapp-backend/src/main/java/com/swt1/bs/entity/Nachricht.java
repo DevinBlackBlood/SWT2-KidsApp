@@ -18,12 +18,11 @@ public class Nachricht {
     @ManyToOne(targetEntity = Chat.class)
     private Chat chat;
 
-    public Nachricht(Long chatId, String inhalt) {
-
-    }
-
     public Nachricht(String inhalt) {
-
+        this.inhalt = inhalt;
     }
 
+    public Nachricht() {
+
+    }
 }
