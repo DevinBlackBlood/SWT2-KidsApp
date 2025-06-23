@@ -13,6 +13,17 @@ public class Umfrage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String inhalt;
+
     @ElementCollection
     private List<String> optionen;
+
+    public Umfrage(String inhalt, List<String> optionen) {
+        this.inhalt = inhalt;
+        this.optionen = optionen;
+    }
+
+    public Umfrage() {
+
+    }
 }
