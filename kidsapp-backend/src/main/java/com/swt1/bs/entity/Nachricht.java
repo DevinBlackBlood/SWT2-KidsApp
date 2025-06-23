@@ -2,11 +2,13 @@ package com.swt1.bs.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Nachricht {
 
     @Id

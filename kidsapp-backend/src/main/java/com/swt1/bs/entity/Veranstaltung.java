@@ -13,11 +13,14 @@ public class Veranstaltung {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private Adresse adresse;
+
     private String beschreibung;
+
     private String veranstaltungName;
 
-    @OneToMany(mappedBy = "veranstaltung", targetEntity = Benutzer.class)
+    @OneToMany(targetEntity = Benutzer.class)
     private List<Benutzer> benutzer;
 
 

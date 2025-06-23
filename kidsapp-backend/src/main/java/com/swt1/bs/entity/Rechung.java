@@ -14,6 +14,7 @@ import java.sql.Time;
 public class Rechung {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer rechnungsnummer;
