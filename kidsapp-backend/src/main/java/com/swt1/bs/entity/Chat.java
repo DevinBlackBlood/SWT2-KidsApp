@@ -15,6 +15,9 @@ public class Chat {
     private String name;
     private byte[] gruppenbild;
 
+    @ManyToMany(targetEntity = Benutzer.class)
+    private List<Benutzer> benutzer;
+
     @OneToMany(mappedBy = "chat", targetEntity = Nachricht.class)
     private List<Nachricht> nachrichten;
 

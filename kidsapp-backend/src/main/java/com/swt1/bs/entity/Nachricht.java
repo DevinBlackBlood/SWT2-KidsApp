@@ -24,5 +24,4 @@ public class Nachricht {
         this.chat = chat;
         this.inhalt = inhalt;
     }
-
 }
