@@ -1,8 +1,7 @@
 .navbar {
   height: 50px;
   background-color: white;
-
-  border-bottom: rgba(52,52,52,0.86) 1px solid;
+  box-shadow: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,4 +25,8 @@
   background-image: none;
 }
 
+img {
+
+  width: 50px;
+}
 
