@@ -2,6 +2,7 @@ package com.swt1.bs.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class Chat {
     @ManyToMany(targetEntity = Benutzer.class)
     private List<Benutzer> benutzer;
 
+    @Getter
     @OneToMany(mappedBy = "chat", targetEntity = Nachricht.class)
     private List<Nachricht> nachrichten;
+
 }
