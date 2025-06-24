@@ -42,4 +42,6 @@ public class Benutzer {
     @OneToMany(targetEntity = Nachricht.class)
     private List<Nachricht> nachrichten;
 
+    @ManyToMany(targetEntity = Chat.class)
+    private List<Chat> chats;
 }

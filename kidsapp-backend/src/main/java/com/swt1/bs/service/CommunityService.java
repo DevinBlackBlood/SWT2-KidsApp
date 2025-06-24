@@ -6,6 +6,7 @@ import com.swt1.bs.entity.Umfrage;
 import com.swt1.bs.repository.ChatRepository;
 import com.swt1.bs.repository.NachrichtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchDataSourceScriptDatabaseInitializer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +29,20 @@ public class CommunityService {
         return (List<Chat>) chatRepository.findAll();
     }
 
-    public Nachricht sendeNachricht(Chat chat, String inhalt) {
-        return new Nachricht(chat, inhalt);
+    public void sendeNachricht(String inhalt, Long chatId) {
+        Nachricht newNachricht = new Nachricht(inhalt);
+        Chat chat = chatRepository.findById(chatId).orElse(null);
+        assert chat != null;
+        chat.addNachricht(newNachricht);
     }
 
-    public void sendeUmfrage(String inhalt, String[] optionen, Long chatId) {}
+    public void sendeUmfrage(String inhalt, List<String> optionen, Long chatId) {
+        Umfrage newUmfrage = new Umfrage(inhalt, optionen);
+        Chat chat = chatRepository.findById(chatId).orElse(null);
+        assert chat != null;
+
+
+    }
 
     private Nachricht createNachricht(Chat chat, String inhalt) {
         return new Nachricht(chat, inhalt);
