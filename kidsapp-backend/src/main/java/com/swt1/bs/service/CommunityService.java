@@ -28,14 +28,14 @@ public class CommunityService {
         return (List<Chat>) chatRepository.findAll();
     }
 
-    public Nachricht sendeNachricht(String inhalt, Long chatId) {
-        return new Nachricht(chatId, inhalt); //TODO
+    public Nachricht sendeNachricht(Chat chat, String inhalt) {
+        return new Nachricht(chat, inhalt);
     }
 
     public void sendeUmfrage(String inhalt, String[] optionen, Long chatId) {}
 
-    private Nachricht createNachricht(String inhalt) {
-        return new Nachricht(inhalt);
+    private Nachricht createNachricht(Chat chat, String inhalt) {
+        return new Nachricht(chat, inhalt);
     }
 
     private Umfrage createUmfrage(String inhalt, String[] optionen, Long chatId) {
