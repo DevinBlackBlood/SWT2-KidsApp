@@ -19,7 +19,7 @@ public class Rechung {
 
     private Integer rechnungsnummer;
 
-    private Anschrift rechnungsanschrift;
+    private String rechnungsanschrift;
 
     private Anschrift veranstalteranschrift;
 
