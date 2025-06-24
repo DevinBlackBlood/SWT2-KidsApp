@@ -20,6 +20,4 @@ public class Chat {
 
     @OneToMany(mappedBy = "chat", targetEntity = Nachricht.class)
     private List<Nachricht> nachrichten;
-
-    public void addNachricht(Nachricht nachricht) {}
 }

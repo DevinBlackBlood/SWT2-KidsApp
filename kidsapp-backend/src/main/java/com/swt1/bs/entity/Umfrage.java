@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Umfrage {
+public class Umfrage extends Nachricht {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
