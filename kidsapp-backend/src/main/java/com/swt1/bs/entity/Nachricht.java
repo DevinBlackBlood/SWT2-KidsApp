@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Nachricht {
 
     @Id

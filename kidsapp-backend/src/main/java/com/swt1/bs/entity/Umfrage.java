@@ -2,11 +2,13 @@ package com.swt1.bs.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Umfrage extends Nachricht {
 
     @Id
@@ -18,10 +20,8 @@ public class Umfrage extends Nachricht {
     @ElementCollection
     private List<String> optionen;
 
-
-    public Umfrage(List<String> optionen, String inhalt) {
-        this.inhalt = inhalt;
+    public Umfrage(List<String> optionen, String inhalt, Chat chat) {
+        super(chat, inhalt);
         this.optionen = optionen;
     }
-
 }
