@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Data
 @Entity
-@NoArgsConstructor
 public class Nachricht {
 
     @Id
@@ -24,4 +23,6 @@ public class Nachricht {
         this.chat = chat;
         this.inhalt = inhalt;
     }
+
+    public Nachricht() {}
 }

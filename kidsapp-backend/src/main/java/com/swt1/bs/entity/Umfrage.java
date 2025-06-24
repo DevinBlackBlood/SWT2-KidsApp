@@ -8,7 +8,6 @@ import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
 public class Umfrage extends Nachricht {
 
     @Id
@@ -23,5 +22,9 @@ public class Umfrage extends Nachricht {
     public Umfrage(List<String> optionen, String inhalt, Chat chat) {
         super(chat, inhalt);
         this.optionen = optionen;
+    }
+
+    public Umfrage() {
+        super();
     }
 }
