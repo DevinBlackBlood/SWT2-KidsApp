@@ -6,7 +6,6 @@ import com.swt1.bs.entity.Umfrage;
 import com.swt1.bs.repository.ChatRepository;
 import com.swt1.bs.repository.NachrichtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchDataSourceScriptDatabaseInitializer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
