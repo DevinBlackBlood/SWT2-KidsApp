@@ -18,12 +18,10 @@ public class Umfrage extends Nachricht {
     @ElementCollection
     private List<String> optionen;
 
-    public Umfrage(String inhalt, List<String> optionen) {
+
+    public Umfrage(List<String> optionen, String inhalt) {
         this.inhalt = inhalt;
         this.optionen = optionen;
     }
 
-    public Umfrage() {
-
-    }
 }
