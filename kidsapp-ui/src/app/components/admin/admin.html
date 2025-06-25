@@ -8,7 +8,7 @@
 
 
 
-<mat-card style=" grid-column: 1;" >
+<mat-card style=" grid-column: 1;" (click)="doRoute('user/verwaltung')" >
   <mat-card-header>
     <mat-card-title>
       User Verwalten
@@ -19,7 +19,7 @@
 </mat-card-content>
 </mat-card>
 
-  <mat-card style=" grid-column: 2;">
+  <mat-card style=" grid-column: 2;"(click)="doRoute('veranstaltung/verwaltung')">
     <mat-card-header>
       <mat-card-title>
         Veranstaltungen Verwalten
@@ -30,10 +30,10 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card style=" grid-column: 1;">
+  <mat-card style=" grid-column: 1;"(click)="doRoute('rechnungen/verwaltung')">
     <mat-card-header>
       <mat-card-title>
-        Rechungen Verwalten
+        Rechnungen Verwalten
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -41,7 +41,7 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card style=" grid-column: 2;">
+  <mat-card style=" grid-column: 2;"(click)="doRoute('antraege/verwaltung')">
     <mat-card-header>
       <mat-card-title>
         Anträge Verwalten
