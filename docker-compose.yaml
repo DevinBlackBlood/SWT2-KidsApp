@@ -2,7 +2,7 @@ services:
   kidsapp-backend:
     depends_on:
       - database
-    image:  ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
     ports:
       - 8081:8081
   api-backend:
