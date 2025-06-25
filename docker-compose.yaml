@@ -2,21 +2,21 @@ services:
   kidsapp-backend:
     depends_on:
       - database
-    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:a3022950105c491bee560e39587267fa62c09f35
     ports:
-      - 8081:8081
+      - "8081:8081"
   api-backend:
     depends_on:
       - database
-    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:a3022950105c491bee560e39587267fa62c09f35
     ports:
-      - 8080:8080
+      - "8080:8080"
   kidsapp-ui:
     depends_on:
       - database
-    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:a3022950105c491bee560e39587267fa62c09f35
     ports:
-      - 4200:4200
+      - "4200:4200"
   database:
     image: postgres:latest
     ports:
