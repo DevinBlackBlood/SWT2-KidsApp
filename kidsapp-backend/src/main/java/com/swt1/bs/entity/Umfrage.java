@@ -2,12 +2,15 @@ package com.swt1.bs.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 public class Umfrage extends Nachricht {
 
     @Id
@@ -24,7 +27,5 @@ public class Umfrage extends Nachricht {
         this.optionen = optionen;
     }
 
-    public Umfrage() {
-        super();
-    }
+
 }

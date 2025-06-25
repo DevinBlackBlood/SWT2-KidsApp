@@ -38,7 +38,7 @@ public class CommunityService {
 
     public void sendeUmfrage(String inhalt, List<String> optionen, Long chatId) {
         Chat chat = chatRepository.findById(chatId).orElse(null);
-        Umfrage newUmfrage = new Umfrage(optionen, inhalt,  chat);
+        Umfrage newUmfrage = new Umfrage(optionen, inhalt, chat);
         assert chat != null;
         chat.getNachrichten().add(newUmfrage);
         chatRepository.save(chat);

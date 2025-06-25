@@ -2,7 +2,6 @@ package com.swt1.bs.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 
 import java.util.List;
 
