@@ -33,6 +33,7 @@ public class CommunityService {
         assert chat != null;
         Nachricht newNachricht = new Nachricht(chat, inhalt);
         chat.getNachrichten().add(newNachricht);
+        chatRepository.save(chat);
     }
 
     public void sendeUmfrage(String inhalt, List<String> optionen, Long chatId) {
@@ -40,6 +41,7 @@ public class CommunityService {
         Umfrage newUmfrage = new Umfrage(optionen, inhalt,  chat);
         assert chat != null;
         chat.getNachrichten().add(newUmfrage);
+        chatRepository.save(chat);
     }
 
     private Nachricht createNachricht(Chat chat, String inhalt) {
