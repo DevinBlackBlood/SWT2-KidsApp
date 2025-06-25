@@ -6,7 +6,6 @@ import com.swt1.bs.entity.Umfrage;
 import com.swt1.bs.repository.ChatRepository;
 import com.swt1.bs.repository.NachrichtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchDataSourceScriptDatabaseInitializer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,26 +29,30 @@ public class CommunityService {
     }
 
     public void sendeNachricht(String inhalt, Long chatId) {
-        Nachricht newNachricht = new Nachricht(inhalt);
-        Chat chat = chatRepository.findById(chatId).orElse(null);
-        assert chat != null;
-        chat.addNachricht(newNachricht);
+        Chat chat = chatRepository.findById(chatId).get();
+        if(chat != null) {
+            Nachricht newNachricht = new Nachricht(chat, inhalt);
+            List<Nachricht> w = chat.getNachrichten();
+            w.add(newNachricht);
+            chat.setNachrichten(w);
+            chatRepository.save(chat);
+        }
     }
 
     public void sendeUmfrage(String inhalt, List<String> optionen, Long chatId) {
-        Umfrage newUmfrage = new Umfrage(inhalt, optionen);
         Chat chat = chatRepository.findById(chatId).orElse(null);
+        Umfrage newUmfrage = new Umfrage(optionen, inhalt, chat);
         assert chat != null;
-
-
+        chat.getNachrichten().add(newUmfrage);
+        chatRepository.save(chat);
     }
 
-    private Nachricht createNachricht(String inhalt) {
-        return new Nachricht(inhalt);
+    private Nachricht createNachricht(Chat chat, String inhalt) {
+        return new Nachricht(chat, inhalt);
     }
 
-    private Umfrage createUmfrage(String inhalt, String[] optionen, Long chatId) {
-        return new Umfrage();
+    private Umfrage createUmfrage(String inhalt, List<String> optionen) {
+        return new Umfrage(optionen, inhalt, null);
     }
 
     public Chat addChat(Chat chat) {
