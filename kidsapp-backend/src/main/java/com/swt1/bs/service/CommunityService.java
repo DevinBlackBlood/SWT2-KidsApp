@@ -32,7 +32,9 @@ public class CommunityService {
         Chat chat = chatRepository.findById(chatId).orElse(null);
         assert chat != null;
         Nachricht newNachricht = new Nachricht(chat, inhalt);
-        chat.getNachrichten().add(newNachricht);
+       List<Nachricht> w =  chat.getNachrichten();
+       w.add(newNachricht);
+       chat.setNachrichten(w);
         chatRepository.save(chat);
     }
 
