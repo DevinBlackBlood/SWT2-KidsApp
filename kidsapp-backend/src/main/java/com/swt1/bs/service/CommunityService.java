@@ -30,12 +30,13 @@ public class CommunityService {
 
     public void sendeNachricht(String inhalt, Long chatId) {
         Chat chat = chatRepository.findById(chatId).get();
-        assert chat != null;
-        Nachricht newNachricht = new Nachricht(chat, inhalt);
-       List<Nachricht> w =  chat.getNachrichten();
-       w.add(newNachricht);
-       chat.setNachrichten(w);
-        chatRepository.save(chat);
+        if(chat != null) {
+            Nachricht newNachricht = new Nachricht(chat, inhalt);
+            List<Nachricht> w = chat.getNachrichten();
+            w.add(newNachricht);
+            chat.setNachrichten(w);
+            chatRepository.save(chat);
+        }
     }
 
     public void sendeUmfrage(String inhalt, List<String> optionen, Long chatId) {
