@@ -29,7 +29,7 @@ public class CommunityService {
     }
 
     public void sendeNachricht(String inhalt, Long chatId) {
-        Chat chat = chatRepository.findById(chatId).orElse(null);
+        Chat chat = chatRepository.findById(chatId).get();
         assert chat != null;
         Nachricht newNachricht = new Nachricht(chat, inhalt);
        List<Nachricht> w =  chat.getNachrichten();
