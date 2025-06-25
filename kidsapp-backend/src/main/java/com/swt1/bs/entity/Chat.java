@@ -19,7 +19,6 @@ public class Chat {
     @ManyToMany(targetEntity = Benutzer.class)
     private List<Benutzer> benutzer;
 
-    @Getter
     @OneToMany(mappedBy = "chat", targetEntity = Nachricht.class)
     private List<Nachricht> nachrichten;
 
