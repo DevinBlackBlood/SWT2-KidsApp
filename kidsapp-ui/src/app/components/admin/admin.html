@@ -6,52 +6,59 @@
 <h1>Wilkommen im Admin bereicht</h1>
 <div class="card">
 
+<div style="border: black 1px solid; width: 60em; height: 25em; display: grid; justify-content: center;align-items: center; grid-gap: 30px; background-color: rgba(53,82,112,0.86)">
 
-
-<mat-card style=" grid-column: 1;" (click)="doRoute('user/verwaltung')" >
+<mat-card class="admin-card" style=" grid-column: 1;" (click)="doRoute('user/verwaltung')" >
   <mat-card-header>
+      <mat-card-title-group>
     <mat-card-title>
+        <mat-icon>account_box</mat-icon>
       User Verwalten
     </mat-card-title>
+      </mat-card-title-group>
   </mat-card-header>
+
 <mat-card-content >
-  <a>Verwaltund der User rechte und Profil Aktivitäten</a>
+  Verwaltung der User rechte und Profil Aktivitäten
 </mat-card-content>
 </mat-card>
 
-  <mat-card style=" grid-column: 2;"(click)="doRoute('veranstaltung/verwaltung')">
+  <mat-card class="admin-card"  style=" grid-column: 2;"(click)="doRoute('veranstaltung/verwaltung')">
     <mat-card-header>
       <mat-card-title>
+          <mat-icon>local_activity</mat-icon>
         Veranstaltungen Verwalten
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <a>Verwaltund der User rechte und Profil Aktivitäten</a>
+      Verwaltung von Veranstaltungen und deren bearbeitung
     </mat-card-content>
   </mat-card>
 
-  <mat-card style=" grid-column: 1;"(click)="doRoute('rechnungen/verwaltung')">
+  <mat-card class="admin-card"  style=" grid-column: 1;"(click)="doRoute('rechnungen/verwaltung')">
     <mat-card-header>
       <mat-card-title>
+          <mat-icon>receipt</mat-icon>
         Rechnungen Verwalten
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <a>Verwaltund der User rechte und Profil Aktivitäten</a>
+      Verwaltung der Rechnungen der User
     </mat-card-content>
   </mat-card>
 
-  <mat-card style=" grid-column: 2;"(click)="doRoute('antraege/verwaltung')">
+  <mat-card class="admin-card"  style=" grid-column: 2;"(click)="doRoute('antraege/verwaltung')">
     <mat-card-header>
       <mat-card-title>
+          <mat-icon>assignment_add</mat-icon>
         Anträge Verwalten
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <a>Verwaltund der User rechte und Profil Aktivitäten</a>
+      Verwaltung der Anträge der Veranstalter
     </mat-card-content>
   </mat-card>
 </div>
-
+</div>
 </body>
 

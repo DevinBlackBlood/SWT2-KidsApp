@@ -1,6 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
-import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
+import {
+  MatCard,
+  MatCardAvatar,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardTitleGroup
+} from '@angular/material/card';
 import {Router} from '@angular/router';
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-admin',
@@ -9,6 +17,8 @@ import {Router} from '@angular/router';
     MatCardTitle,
     MatCardHeader,
     MatCardContent,
+    MatIcon,
+    MatCardTitleGroup,
   ],
   templateUrl: './admin.html',
   styleUrl: './admin.css'

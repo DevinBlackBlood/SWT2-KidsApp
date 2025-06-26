@@ -10,6 +10,15 @@ import {
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatFormField} from '@angular/material/input';
+import {
+  MatCard,
+  MatCardActions, MatCardAvatar,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle, MatCardTitleGroup
+} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -44,6 +53,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatRow,
     MatRowDef,
     MatHeaderRowDef,
+    MatCardSubtitle,
+    MatCardTitle,
+    MatCardHeader,
+    MatCard,
+    MatCardContent,
+    MatCardActions,
+    MatButton,
+    MatCardTitleGroup,
+    MatCardAvatar,
 
   ],
   templateUrl: './user-verwaltung.html',
@@ -54,7 +72,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class UserVerwaltung {
 
   constructor() {}
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+lauf: number[] = [3,3,3,3,3,3,3,3,3,3]
+
 
 }
