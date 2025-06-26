@@ -30,3 +30,14 @@ img {
   width: 50px;
 }
 
+.admin-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+}
+
+

@@ -1,10 +1,10 @@
 // leaflet.component.ts - Angular 20+ Compatible
-import { 
-  Component, 
-  OnInit, 
-  OnDestroy, 
-  AfterViewInit, 
-  ElementRef, 
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  ElementRef,
   ViewChild,
   inject,
   DestroyRef
@@ -12,7 +12,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import * as L from 'leaflet';
-import { MarkerService } from '../marker.service';
+import { MarkerService } from '../../marker.service';
 
 // Fix default marker icons for Angular 20+
 const iconDefault = L.icon({
@@ -46,7 +46,7 @@ L.Marker.prototype.options.icon = iconDefault;
       display: block;
       background: #f0f0f0;
     }
-    
+
     .map-container {
       height: 100%;
       width: 100%;
@@ -61,12 +61,12 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('mapElement', { static: false }) mapElement!: ElementRef<HTMLDivElement>;
-  
+
   private map!: L.Map;
   private markers: L.Marker[] = [];
   private isMapReady = false;
   private destroyRef = inject(DestroyRef);
-  
+
   constructor(private markerService: MarkerService) {}
 
   ngOnInit() {
@@ -87,7 +87,7 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
   private initializeMap() {
     try {
       const element = this.mapElement?.nativeElement;
-      
+
       if (!element) {
         console.error('Map element not available');
         setTimeout(() => this.initializeMap(), 100);
@@ -153,7 +153,7 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
       }, 1000);
 
     } catch (error) {
-    
+
       setTimeout(() => this.initializeMap(), 500);
     }
   }
@@ -188,7 +188,7 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
         .addTo(this.map)
         .bindPopup(`Location: ${coords[0].toFixed(4)}, ${coords[1].toFixed(4)}`)
         .openPopup();
-      
+
       this.markers.push(marker);
       console.log('Marker added at:', coords);
     } catch (error) {

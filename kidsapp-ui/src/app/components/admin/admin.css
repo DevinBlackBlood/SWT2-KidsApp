@@ -1,0 +1,53 @@
+
+
+body {
+  display: flow-root;
+}
+
+h1 {
+  margin: 30px;
+  text-align: center;
+}
+
+.card {
+display: grid;
+justify-content: center;
+
+}
+
+mat-card {
+
+  width: 27em;
+  height: 8em;
+
+}
+
+ mat-icon {
+
+  width: 30px;
+   height: 30px;
+   font-size: 30px;
+}
+
+ mat-card-title {
+
+   display: flex;
+ }
+
+.admin-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border-radius: 12px;
+    width: 27em;
+    height: 8em;
+}
+
+.admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.admin-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

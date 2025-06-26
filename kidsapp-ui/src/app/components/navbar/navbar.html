@@ -1,0 +1,36 @@
+
+<div class="navbar">
+  <div>
+    <img src="https://www.herne.de/Bilder/historisch/wappen/wappen-herne_Grafikbox.jpg">
+  </div>
+
+  <div class="navbarEnd">
+
+      <button style="background-color: white; border: none" [matMenuTriggerFor]="menu">
+          <mat-icon aria-hidden="true" class="admin-card" fontIcon="account_circle"></mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item [disabled]="!user">
+              <mat-icon fontIcon="edit_square" style="font-size: 25px"></mat-icon>
+              <span>Profil</span>
+          </button>
+          <button mat-menu-item [disabled]="!user">
+              <mat-icon fontIcon="settings" style="font-size: 25px"></mat-icon>
+              <span>Einstellungen</span>
+          </button>
+          @if (user){
+          <button mat-menu-item (click)="user = false ; doRoute('')">
+              <mat-icon fontIcon="logout" style="font-size: 25px">notifications_off</mat-icon>
+              <span>Ausloggen</span>
+          </button>
+          } @else {
+              <button mat-menu-item (click)="user = true">
+                  <mat-icon fontIcon="login" style="font-size: 25px">notifications_off</mat-icon>
+                  <span>Einloggen</span>
+              </button>
+          }
+      </mat-menu>
+
+    <mat-icon aria-hidden="true" fontIcon="menu"></mat-icon>
+  </div>
+</div>
