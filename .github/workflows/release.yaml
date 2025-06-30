@@ -84,11 +84,11 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: 'npm'
           cache-dependency-path: kidsapp-ui/package-lock.json
-      - name: Build Angular app
-        run: npx ng build --configuration=production
       - name: Install dependencies
         working-directory: ${{ matrix.project }}
         run: npm ci
+      - name: Build Angular app
+        run: npx ng build --configuration=production
       - name: Build
         run: |
               cd ${{ matrix.project }}
