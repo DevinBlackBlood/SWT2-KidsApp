@@ -78,10 +78,6 @@ jobs:
         uses: docker/metadata-action@v5.7.0
         with:
           images: ${{ matrix.project }}
-      - name: Build cache clear
-        run: |
-              cd ${{ matrix.project }}
-              npm cache clear
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
