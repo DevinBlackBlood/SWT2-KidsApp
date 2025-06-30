@@ -78,6 +78,10 @@ jobs:
         uses: docker/metadata-action@v5.7.0
         with:
           images: ${{ matrix.project }}
+      - name: Build cache clear
+        run: |
+              cd ${{ matrix.project }}
+              npm cache clear
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -91,10 +95,6 @@ jobs:
         run: |
               cd ${{ matrix.project }}
               npm run build
-      - name: Build generate_bsclient
-        run: |
-              cd ${{ matrix.project }}
-              npm run generate_bsclient
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3.4.0
         with:
