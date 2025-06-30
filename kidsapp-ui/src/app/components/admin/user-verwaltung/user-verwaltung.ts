@@ -43,16 +43,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-user-verwaltung',
   imports: [
-    MatTable,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatCell,
-    MatColumnDef,
-    MatCellDef,
-    MatHeaderRow,
-    MatRow,
-    MatRowDef,
-    MatHeaderRowDef,
     MatCardSubtitle,
     MatCardTitle,
     MatCardHeader,
@@ -60,7 +50,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatCardContent,
     MatCardActions,
     MatButton,
-    MatCardTitleGroup,
     MatCardAvatar,
 
   ],
