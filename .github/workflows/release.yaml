@@ -89,6 +89,8 @@ jobs:
         run: npm ci
       - name: Install Angular CLI
         run: npm install -g @angular/cli
+      - name: Install generate_bsclient
+        run: npm run generate_bsclient
       - name: Build
         run: |
               cd ${{ matrix.project }}
