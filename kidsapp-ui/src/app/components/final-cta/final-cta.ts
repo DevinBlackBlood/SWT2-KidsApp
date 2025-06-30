@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
    standalone: true,  // Für Angular 14+
   imports: [CommonModule],
   templateUrl: './final-cta.html',
-  styleUrls: ['./final-cta.scss']
+  styleUrls: ['./final-cta.css']
 })
 export class FinalCta implements OnInit {
   constructor(private animation: AnimationService) {}

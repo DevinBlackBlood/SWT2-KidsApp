@@ -5,8 +5,8 @@ import { Component, OnInit } from '@angular/core';
 selector: 'app-stats',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './stats.html',
-  styleUrls: ['./stats.scss']
+templateUrl: './stats.html',
+  styleUrls: ['./stats.css']
 })
 export class Stats implements OnInit {
   stats = [
@@ -16,6 +16,6 @@ export class Stats implements OnInit {
   ];
 
   ngOnInit() {
-    // Animation würde hier mit CountUp.js implementiert werden
   }
+  
 }

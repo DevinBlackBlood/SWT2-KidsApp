@@ -1,62 +1,149 @@
-import { Component, OnInit } from '@angular/core';
-import { AnimationService } from '../../services/animation';
-import { FinalCta } from "../../components/final-cta/final-cta";
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Header } from '../../components/header/header';
+import { Hero } from '../../components/hero/hero';
+import { Stats } from '../../components/stats/stats';
+import { Features } from '../../components/features/features';
+import { FinalCta } from '../../components/final-cta/final-cta';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FinalCta],
-  providers: [DatePipe],
   templateUrl: './home.html',
-  styleUrls: ['./home.scss']
+  styleUrls: ['./home.css'],
+  imports: [Header, Hero, Stats, Features, FinalCta],
 })
-export class Home implements OnInit {
+export class Home implements OnInit, OnDestroy {
+  @ViewChild('heroSection', { static: true }) heroSection!: ElementRef;
+
+  private scrollListener?: () => void;
+  private observer?: IntersectionObserver;
+
+  // Stats data
+  stats = [
+    { value: '500+', label: 'Events pro Monat' },
+    { value: '2.5K+', label: 'Aktive User' },
+    { value: '150+', label: 'Veranstalter' },
+    { value: '4.8★', label: 'App Store Rating' }
+  ];
+
+  // Features data
   features = [
     {
-      icon: '<i class="fas fa-map-marked-alt"></i>',
-      title: 'Live Event-Karte',
-      description: 'Alle Events auf einen Blick in der interaktiven Karte'
+      icon: '🗺️',
+      title: 'Interactive Map',
+      description: 'Entdecke Events auf unserer interaktiven Stadtkarte. Sieh sofort, was in deiner Nähe abgeht!'
     },
     {
-      icon: '<i class="fas fa-robot"></i>',
+      icon: '🎯',
+      title: 'Smart Filter',
+      description: 'Finde Events nach deinen Vorlieben, Alter und Interessen. Nur das, was dich wirklich interessiert!'
+    },
+    {
+      icon: '🤖',
       title: 'KI-Empfehlungen',
-      description: 'Personalisierte Vorschläge basierend auf deinen Vorlieben'
+      description: 'Unsere KI lernt deine Vorlieben und schlägt dir perfekte Events vor. Nie wieder langweilige Wochenenden!'
     },
     {
-      icon: '<i class="fas fa-users"></i>',
-      title: 'Community',
-      description: 'Austausch mit anderen Event-Fans und Veranstaltern'
+      icon: '💬',
+      title: 'Community Chat',
+      description: 'Chatte mit anderen Teilnehmern, tausche dich aus und finde neue Freunde bei Events!'
+    },
+    {
+      icon: '🎫',
+      title: 'Easy Booking',
+      description: 'Buche Events mit einem Klick und verwalte alle deine Tickets an einem Ort. Super einfach!'
+    },
+    {
+      icon: '🔔',
+      title: 'Live Updates',
+      description: 'Verpasse nie wieder wichtige Infos! Erhalte Push-Benachrichtigungen für deine gebuchten Events.'
     }
   ];
 
-  filters = ['Alle', 'Musik', 'Sport', 'Kunst', 'Essen'];
-  activeFilter = 'Alle';
-
-  events = [
-    {
-      title: 'Stadtfest Herne',
-      location: 'Stadtpark Herne',
-      date: new Date('2023-06-15'),
-      category: 'Festival',
-      image: 'assets/images/event1.jpg'
-    },
-    // Weitere Events...
-  ];
-
-  get filteredEvents() {
-    return this.activeFilter === 'Alle' 
-      ? this.events 
-      : this.events.filter(e => e.category === this.activeFilter);
+  ngOnInit(): void {
+    this.initSmoothScrolling();
+    this.initParallaxEffect();
+    this.initIntersectionObserver();
   }
 
-  constructor(private animation: AnimationService) {}
-
-  ngOnInit() {
-    this.animation.animateHomepage();
+  ngOnDestroy(): void {
+    if (this.scrollListener) {
+      window.removeEventListener('scroll', this.scrollListener);
+    }
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 
-  setFilter(filter: string) {
-    this.activeFilter = filter;
+  private initSmoothScrolling(): void {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = anchor.getAttribute('href');
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }
+      });
+    });
+  }
+
+  private initParallaxEffect(): void {
+    this.scrollListener = () => {
+      const scrolled = window.pageYOffset;
+      if (this.heroSection?.nativeElement) {
+        this.heroSection.nativeElement.style.transform = `translateY(${scrolled * 0.3}px)`;
+      }
+    };
+    window.addEventListener('scroll', this.scrollListener);
+  }
+
+  private initIntersectionObserver(): void {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target as HTMLElement;
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe elements after view init
+    setTimeout(() => {
+      document.querySelectorAll('.feature-card, .stat-item h3').forEach(element => {
+        const htmlElement = element as HTMLElement;
+        htmlElement.style.opacity = '0';
+        htmlElement.style.transform = 'translateY(30px)';
+        htmlElement.style.transition = 'all 0.6s ease';
+        this.observer?.observe(htmlElement);
+      });
+    }, 100);
+  }
+
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
+  downloadApp(store: 'ios' | 'android'): void {
+    // Hier würdest du die tatsächlichen Store-Links einfügen
+    console.log(`Downloading app from ${store}`);
+   
   }
 }

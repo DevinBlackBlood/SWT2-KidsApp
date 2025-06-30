@@ -1,76 +1,8 @@
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Deine Event-Community in Herne</h1>
-    <p>Entdecke Events, die zu dir passen - mit KI-Empfehlungen und Live-Karte</p>
-    <div class="search-bar">
-      <input type="text" placeholder="Was suchst du heute?">
-      <button>
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
-  </div>
-  <div class="map-preview">
-    <img src="assets/images/map-preview.png" alt="Live-Kartenansicht">
-    <div class="live-badge">LIVE</div>
-  </div>
-</section>
-
-<!-- Key Features -->
-<section class="features">
-  @for (feature of features; track feature) {
-    <div class="feature-card">
-      <div class="icon">{{ feature.icon }}</div>
-      <h3>{{ feature.title }}</h3>
-      <p>{{ feature.description }}</p>
-    </div>
-  }
-</section>
-
-<!-- Event Listings -->
-<section class="event-listings">
-  <h2>Beliebte Events in Herne</h2>
-  <div class="filter-options">
-    @for (filter of filters; track filter) {
-      <button [class.active]="activeFilter === filter" (click)="setFilter(filter)">
-        {{ filter }}
-      </button>
-    }
-  </div>
-  
-  <div class="events-grid">
-    @for (event of filteredEvents; track event) {
-      <div class="event-card">
-        <div class="event-image">
-          <img [src]="event.image" [alt]="event.title">
-          <span class="category-badge">{{ event.category }}</span>
-        </div>
-        <div class="event-details">
-          <h3>{{ event.title }}</h3>
-          <p class="location">
-            <i class="fas fa-map-marker-alt"></i> {{ event.location }}
-          </p>
-          <p class="date">
-            <i class="far fa-calendar-alt"></i> {{ event.date | date:'mediumDate' }}
-          </p>
-          <button class="book-btn">Jetzt buchen</button>
-        </div>
-      </div>
-    }
-  </div>
-</section>
-
-<!-- Community Section -->
-<section class="community">
-  <div class="community-content">
-    <h2>Werfe mit anderen Event-Fans</h2>
-    <p>Tausche dich in unserer Community über vergangene und kommende Events aus</p>
-    <button class="community-btn">Community betreten</button>
-  </div>
-  <div class="community-preview">
-    <img src="assets/images/community-chat.png" alt="Community Vorschau">
-  </div>
-</section>
-
-<!-- Final CTA -->
-<app-final-cta></app-final-cta>
+   <div class="gradient-bg"></div>
+    <div class="glass-overlay"></div>
+    
+    <app-header></app-header>
+    <app-hero></app-hero>
+    <app-stats></app-stats>
+    <app-features></app-features>
+    <app-final-cta></app-final-cta>
