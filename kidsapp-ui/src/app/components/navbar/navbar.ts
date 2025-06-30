@@ -9,7 +9,6 @@ import {Router} from "@angular/router";
   imports: [
     MatIcon,
     MatMenu,
-    MatIconButton,
     MatMenuItem,
     MatMenuTrigger
   ],
