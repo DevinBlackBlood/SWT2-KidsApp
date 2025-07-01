@@ -14,6 +14,7 @@ public class Veranstaltung {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adresse adresse;
 
     private String beschreibung;

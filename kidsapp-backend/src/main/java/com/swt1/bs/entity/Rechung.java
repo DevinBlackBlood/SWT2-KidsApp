@@ -19,8 +19,11 @@ public class Rechung {
 
     private Integer rechnungsnummer;
 
-    private String rechnungsanschrift;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Anschrift rechnungsanschrift;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Anschrift veranstalteranschrift;
 
     private Time ausstellungszeitpunkt;

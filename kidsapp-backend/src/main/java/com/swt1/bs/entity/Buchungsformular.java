@@ -11,6 +11,7 @@ public class Buchungsformular {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(fetch = FetchType.EAGER)
     private Anschrift rechnungsanschrift;
     private String email;
     private int teilnehmeranzahl;
