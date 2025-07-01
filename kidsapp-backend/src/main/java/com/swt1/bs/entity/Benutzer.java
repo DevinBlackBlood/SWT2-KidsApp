@@ -26,6 +26,7 @@ public class Benutzer {
 
     private String passwort;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adresse adresse;
 
     private byte[] profilebild;
