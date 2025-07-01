@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -8,6 +8,17 @@ import {
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable
 } from '@angular/material/table';
+import {Veranstaltung, VeranstaltungControllerService} from '../../../../../src-gen/bsclient';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle
+} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -31,21 +42,28 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-veranstaltung-verwaltung',
   imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatHeaderCellDef
+    MatCardSubtitle,
+    MatCardContent,
+    MatCardTitle,
+    MatCardHeader,
+    MatCard,
+    MatCardActions,
+    MatButton
   ],
   templateUrl: './veranstaltung-verwaltung.html',
   styleUrl: './veranstaltung-verwaltung.css'
 })
-export class VeranstaltungVerwaltung {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+export class VeranstaltungVerwaltung implements OnInit{
+  constructor(private veranstaltungControllerService:VeranstaltungControllerService) {
+  }
+  datasource: Veranstaltung[] = []
+
+  ngOnInit() {
+
+    this.veranstaltungControllerService.veranstaltungen().subscribe( e => {
+
+      this.datasource = e;
+    })
+  }
+
 }

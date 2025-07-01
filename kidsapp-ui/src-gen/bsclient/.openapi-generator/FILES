@@ -3,6 +3,7 @@ README.md
 api.module.ts
 api/api.ts
 api/benutzerController.service.ts
+api/veranstaltungController.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -15,6 +16,7 @@ model/models.ts
 model/nachricht.ts
 model/rechung.ts
 model/ticket.ts
+model/veranstalter.ts
 model/veranstaltung.ts
 param.ts
 variables.ts

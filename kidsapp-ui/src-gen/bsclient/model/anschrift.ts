@@ -10,6 +10,12 @@
 
 
 export interface Anschrift { 
+    id?: number;
+    strasse?: string;
+    plz?: string;
+    ort?: string;
+    land?: string;
     vorname?: string;
+    nachname?: string;
 }
 

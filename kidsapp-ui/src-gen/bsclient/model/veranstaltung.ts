@@ -8,14 +8,17 @@
  * Do not edit the class manually.
  */
 import { Adresse } from './adresse';
+import { Veranstalter } from './veranstalter';
 import { Benutzer } from './benutzer';
 
 
 export interface Veranstaltung { 
     id?: number;
     adresse?: Adresse;
+    status?: string;
     beschreibung?: string;
     veranstaltungName?: string;
+    veranstalter?: Veranstalter;
     benutzer?: Array<Benutzer>;
 }
 
