@@ -7,7 +7,7 @@ import {UserVerwaltung} from './components/admin/user-verwaltung/user-verwaltung
 import {VeranstaltungVerwaltung} from './components/admin/veranstaltung-verwaltung/veranstaltung-verwaltung';
 import {RechungVerwaltung} from './components/admin/rechung-verwaltung/rechung-verwaltung';
 import {AntraegeVerwaltung} from './components/admin/antraege-verwaltung/antraege-verwaltung';
-import {UserEventVerwaltungComponent} from './user-event-verwaltung/user-event-verwaltung.component';
+import {UserEventVerwaltungComponent} from './components/user-event-verwaltung/user-event-verwaltung.component';
 
 
 export const routes: Routes = [
