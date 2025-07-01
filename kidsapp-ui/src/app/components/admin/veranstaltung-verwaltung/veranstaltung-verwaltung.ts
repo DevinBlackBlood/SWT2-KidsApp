@@ -11,7 +11,7 @@ import {
 import {Veranstaltung, VeranstaltungControllerService} from '../../../../../src-gen/bsclient';
 import {
   MatCard,
-  MatCardActions,
+  MatCardActions, MatCardAvatar,
   MatCardContent,
   MatCardHeader,
   MatCardSubtitle,
@@ -48,7 +48,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatCardHeader,
     MatCard,
     MatCardActions,
-    MatButton
+    MatButton,
+    MatCardAvatar
   ],
   templateUrl: './veranstaltung-verwaltung.html',
   styleUrl: './veranstaltung-verwaltung.css'
@@ -69,7 +70,7 @@ export class VeranstaltungVerwaltung implements OnInit{
 
   doLoeschen(id: number){
 
-    this.veranstaltungControllerService.loeschenVeranstaltung(id)
+    this.veranstaltungControllerService.loeschenVeranstaltung(id).subscribe()
 
   }
 
@@ -86,6 +87,6 @@ export class VeranstaltungVerwaltung implements OnInit{
       }
     }
 
-  this.veranstaltungControllerService.speichernVeranstaltung(veranstaltung);
+  this.veranstaltungControllerService.speichernVeranstaltung(veranstaltung).subscribe()
   }
 }
