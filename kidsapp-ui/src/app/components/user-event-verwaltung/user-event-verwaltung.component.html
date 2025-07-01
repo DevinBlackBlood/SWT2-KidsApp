@@ -1,23 +1,28 @@
 <div class="container">
   <h2>Event verwaltung</h2>
-  <mat-card class="example-card" appearance="outlined">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="./bilder/Event-temp.png" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button matButton>LIKE</button>
-      <button matButton>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+  <div class="card-container">
 
+    @for (String of cards; track String) {
+      <mat-card class="card" appearance="outlined">
+        <mat-card-header>
+          <div mat-card-avatar (click)="navigate('/veranstalter')" class="header-image"></div>
+          <mat-card-title (click)="navigate('/veranstalter')">Event Titel</mat-card-title>
+          <mat-card-subtitle>Neues Event</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="Event-temp.png" alt="Event" height="250" width="400">
+        <mat-card-content>
+          <p>
+            <strong>Ein Tag voller Eindrücke, Begegnungen und Inspiration <br></strong>
+            Freuen Sie sich auf ein abwechslungsreiches Event mit spannenden Programmpunkten, interessanten Gesprächen
+            und besonderen Momenten.
+            Ob zum Netzwerken, Mitmachen oder einfach Genießen – es ist für alle etwas dabei.
+            Seien Sie dabei und erleben Sie einen Tag, der verbindet und begeistert.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button matButton (click)="cancelBooking()">Stornieren</button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
 </div>
