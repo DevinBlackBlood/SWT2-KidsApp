@@ -5,4 +5,5 @@ export * from './chat';
 export * from './nachricht';
 export * from './rechung';
 export * from './ticket';
+export * from './veranstalter';
 export * from './veranstaltung';
