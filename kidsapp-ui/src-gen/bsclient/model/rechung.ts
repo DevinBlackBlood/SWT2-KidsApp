@@ -14,7 +14,7 @@ import { Anschrift } from './anschrift';
 export interface Rechung { 
     id?: number;
     rechnungsnummer?: number;
-    rechnungsanschrift?: string;
+    rechnungsanschrift?: Anschrift;
     veranstalteranschrift?: Anschrift;
     ausstellungszeitpunkt?: string;
     faelligkeitsdatum?: string;

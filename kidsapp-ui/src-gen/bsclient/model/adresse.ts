@@ -10,6 +10,7 @@
 
 
 export interface Adresse { 
+    id?: number;
     strasse?: string;
     plz?: string;
     ort?: string;

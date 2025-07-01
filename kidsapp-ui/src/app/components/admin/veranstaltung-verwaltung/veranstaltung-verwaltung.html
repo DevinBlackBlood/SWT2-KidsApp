@@ -1,41 +1,35 @@
 <div class="andiv">
   <h2>Verwaltung der Veranstaltungen</h2>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef> Weight </th>
-      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef> Symbol </th>
-      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    </ng-container>
 
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
 
+  <div class="super">
+    @for (number of datasource;track datasource){
+      <mat-card class="example-card" appearance="outlined">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{number.veranstaltungName}}</mat-card-title>
+          <mat-card-subtitle>{{number.veranstalter?.veranstalterName}}</mat-card-subtitle>
+          <a>{{number.status}}</a>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Beschreibung: {{number.beschreibung}} <br>
+            Ort: {{number.adresse?.land+ " "+ number.adresse?.plz + " " + number.adresse?.ort}}<br>
+            Straße: {{number.adresse?.strasse }}<br>
+            Anzahl Gebuchter Tickets: {{number.benutzer?.length}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button matButton>EDITIEREN</button>
+          <button matButton>SPERREN</button>
+          <button matButton>LÖSCHEN</button>
+        </mat-card-actions>
+      </mat-card>
+    }
 
+  </div>
 
 
 
