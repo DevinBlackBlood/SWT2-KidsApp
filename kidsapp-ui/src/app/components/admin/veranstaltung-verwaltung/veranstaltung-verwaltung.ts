@@ -66,4 +66,26 @@ export class VeranstaltungVerwaltung implements OnInit{
     })
   }
 
+
+  doLoeschen(id: number){
+
+    this.veranstaltungControllerService.loeschenVeranstaltung(id)
+
+  }
+
+  doSpeichern(veranstaltung: Veranstaltung, tag: boolean) {
+    console.log("test")
+    if(tag){
+      if (veranstaltung.status == 'Inaktiv'){
+      veranstaltung.status = 'Aktiv'
+
+      }
+      else {
+        veranstaltung.status = 'Inaktiv'
+        console.log("test")
+      }
+    }
+
+  this.veranstaltungControllerService.speichernVeranstaltung(veranstaltung);
+  }
 }

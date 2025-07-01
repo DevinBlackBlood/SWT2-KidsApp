@@ -22,9 +22,14 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button matButton>EDITIEREN</button>
-          <button matButton>SPERREN</button>
-          <button matButton>LÖSCHEN</button>
+          <button matButton (click)="doSpeichern(number, false)">EDITIEREN</button>
+          @if (number.status == 'Inaktiv') {
+          <button matButton (click)="doSpeichern(number, true)">AKTIVIEREN</button>
+          }
+          @if (number.status == 'Aktiv') {
+          <button matButton (click)="doSpeichern(number, true)">SPERREN</button>
+          }
+          <button matButton (click)="doLoeschen(number.id)">LÖSCHEN</button>
         </mat-card-actions>
       </mat-card>
     }
