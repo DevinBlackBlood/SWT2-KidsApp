@@ -87,6 +87,8 @@ jobs:
       - name: Install dependencies
         working-directory: ${{ matrix.project }}
         run: npm ci
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
       - name: Build
         run: |
               cd ${{ matrix.project }}

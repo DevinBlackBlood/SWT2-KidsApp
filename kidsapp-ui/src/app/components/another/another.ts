@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MarkerService } from '../marker.service';
+import { MarkerService } from '../../marker.service';
 
 @Component({
   selector: 'app-another',

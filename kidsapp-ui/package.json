@@ -6,7 +6,8 @@
     "start": "ng serve --host 0.0.0.0",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate_bsclient": "openapi-generator-cli generate -i http://localhost:8080/openapi/v3/api-docs -g typescript-angular -o src-gen/bsclient --additional-properties apiModulePrefix=BS"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +19,7 @@
     "@angular/material": "~20.0.3",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
+    "@openapitools/openapi-generator-cli": "^2.21.0",
     "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
