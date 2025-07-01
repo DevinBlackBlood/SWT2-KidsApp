@@ -32,18 +32,7 @@ constructor(private router: Router, private benutzerControllerService:BenutzerCo
 
 
 doRoute(url: string){
-this.benutzerControllerService.hallo().subscribe(
-    e => {
 
-      console.log(e)
-    }
-)
-
-this.benutzerControllerService.getBenutzer().subscribe( e => {
-
-  console.log(e)
-})
-
-  // this.router.navigateByUrl(url)
+  this.router.navigateByUrl(url)
 }
 }

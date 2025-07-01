@@ -16,6 +16,7 @@ public class Veranstalter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private Adresse adresse;
 
     private String veranstalterName;
