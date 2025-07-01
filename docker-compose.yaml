@@ -19,13 +19,8 @@ services:
     build:
       context: ./kidsapp-ui
       dockerfile: Dockerfile
-    depends_on:
-      - database
     ports:
-      - "4200:4200"
-    volumes:
-      - ./kidsapp-ui:/app
-    command: ["npm", "run", "start"]
+        - "80:80"
   database:
     image: postgres:latest
     ports:
