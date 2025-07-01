@@ -1,34 +1,37 @@
 services:
   kidsapp-backend:
+    build:
+      context: ./kidsapp-backend
+      dockerfile: Dockerfile
     depends_on:
       - database
-    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
     ports:
-      - 8081:8081
+      - "8080:8080"
   api-backend:
+    build:
+      context: ./api-backend
+      dockerfile: Dockerfile
     depends_on:
       - database
-    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
     ports:
-      - 8080:8080
+      - "8081:8081"
   kidsapp-ui:
-    depends_on:
-      - database
-    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:1e154a8af33d3ffaa03eab03cf58e710ba3383a2
+    build:
+      context: ./kidsapp-ui
+      dockerfile: Dockerfile
     ports:
-      - 4200:4200
+        - "80:80"
   database:
     image: postgres:latest
     ports:
       - "5431:5432"
     restart: always
     environment:
-      POSTGRES_HOST: localhost
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: korkmaz
       POSTGRES_DB: kidsapp
     volumes:
-      - ./postgres:/var/lib/postgres
+      - ./postgres:/var/lib/postgresql/data
   mqtt-broker:
     depends_on:
       - database
