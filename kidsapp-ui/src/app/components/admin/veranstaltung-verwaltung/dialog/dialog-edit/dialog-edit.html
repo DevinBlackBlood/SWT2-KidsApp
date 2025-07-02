@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Veranstaltung Editieren</h2>
+<mat-dialog-content>
+  <div class="grid">
+  <mat-label>Veranstaltung Name</mat-label>
+<mat-form-field>
+  <input matInput [(ngModel)]="veranstaltung.veranstaltung.veranstaltungName" required>
+</mat-form-field>
+  <mat-label>Veranstaltung adresse</mat-label>
+  <mat-form-field>
+    <input matInput [(ngModel)]="veranstaltung.adresse.land" required>
+  </mat-form-field>
+
+    <mat-label>Veranstaltung ort</mat-label>
+    <mat-form-field>
+      <input matInput [(ngModel)]="veranstaltung.adresse.ort" required>
+    </mat-form-field>
+
+    <mat-label>Veranstaltung plz</mat-label>
+    <mat-form-field>
+      <input matInput [(ngModel)]="veranstaltung.adresse.plz" required>
+    </mat-form-field>
+
+    <mat-label>Veranstaltung strasse</mat-label>
+    <mat-form-field>
+      <input matInput [(ngModel)]="veranstaltung.adresse.strasse" required>
+    </mat-form-field>
+
+
+
+  <mat-label>Veranstaltung beschreibung</mat-label>
+  <mat-form-field>
+    <input matInput [(ngModel)]="veranstaltung.veranstaltung.beschreibung" required>
+  </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton (click)="onNoCLick()" >Nein</button>
+  <button matButton (click)="onYesClick()" cdkFocusInitial>Ja</button>
+</mat-dialog-actions>

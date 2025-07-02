@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -8,7 +8,7 @@ import {
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable
 } from '@angular/material/table';
-import {Veranstaltung, VeranstaltungControllerService} from '../../../../../src-gen/bsclient';
+import {Adresse, Veranstaltung, VeranstaltungControllerService} from '../../../../../src-gen/bsclient';
 import {
   MatCard,
   MatCardActions, MatCardAvatar,
@@ -18,26 +18,15 @@ import {
   MatCardTitle
 } from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogLoeschen} from './dialog/dialog-loeschen/dialog-loeschen';
+import {DialogEdit} from './dialog/dialog-edit/dialog-edit';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface veranstaltungData {
+
+  veranstaltung: Veranstaltung;
+  adresse: Adresse;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-veranstaltung-verwaltung',
@@ -54,6 +43,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './veranstaltung-verwaltung.html',
   styleUrl: './veranstaltung-verwaltung.css'
 })
+
+
+
 export class VeranstaltungVerwaltung implements OnInit{
   constructor(private veranstaltungControllerService:VeranstaltungControllerService) {
   }
@@ -89,4 +81,47 @@ export class VeranstaltungVerwaltung implements OnInit{
 
   this.veranstaltungControllerService.speichernVeranstaltung(veranstaltung).subscribe()
   }
+
+
+
+  readonly dialog = inject(MatDialog);
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, id: number): void {
+   const dialogRef = this.dialog.open(DialogLoeschen, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+    dialogRef.afterClosed().subscribe( result => {
+
+      if (result){
+
+        this.doLoeschen(id);
+      }
+
+    })
+  }
+
+  openEditDialog(enterAnimationDuration: string, exitAnimationDuration: string, veranstaltung: Veranstaltung): void {
+    const dialogRef = this.dialog.open(DialogEdit, {
+      width: '600px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+      data:{ veranstaltung: veranstaltung, adresse: veranstaltung.adresse }
+    });
+    dialogRef.afterClosed().subscribe( result => {
+
+      if (result != undefined){
+     let veranstaltungData: veranstaltungData = result
+        let veranstaltung: Veranstaltung = veranstaltungData.veranstaltung
+        veranstaltung.adresse = veranstaltungData.adresse;
+        console.log(veranstaltung)
+        //TODO hier muss noch die Adresse gespeichert werden
+        this.doSpeichern(veranstaltung, false);
+      }
+
+    })
+  }
+
+
 }
