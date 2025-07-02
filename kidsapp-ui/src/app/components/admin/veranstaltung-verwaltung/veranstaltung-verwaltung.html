@@ -5,6 +5,7 @@
 
 
   <div class="super">
+
     @for (number of datasource;track datasource){
       <mat-card class="example-card" appearance="outlined">
         <mat-card-header>
@@ -22,10 +23,10 @@
         </mat-card-content>
         <mat-card-actions>
           <button matButton (click)="openEditDialog('0ms','0ms', number)">EDITIEREN</button>
-          @if (number.status == 'Inaktiv') {
+          @if (number.status?.toLowerCase() == 'inaktiv') {
           <button matButton (click)="doSpeichern(number, true)">AKTIVIEREN</button>
           }
-          @if (number.status == 'Aktiv') {
+          @if (number.status?.toLowerCase() == 'aktiv') {
           <button matButton (click)="doSpeichern(number, true)">SPERREN</button>
           }
           <button matButton (click)="openDialog('0ms','0ms', number.id!)">LÖSCHEN</button>

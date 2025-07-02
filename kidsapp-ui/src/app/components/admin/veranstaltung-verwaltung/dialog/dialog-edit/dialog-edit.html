@@ -5,6 +5,10 @@
 <mat-form-field>
   <input matInput [(ngModel)]="veranstaltung.veranstaltung.veranstaltungName" required>
 </mat-form-field>
+    <mat-label>Veranstaltung beschreibung</mat-label>
+    <mat-form-field>
+      <input matInput [(ngModel)]="veranstaltung.veranstaltung.beschreibung" required>
+    </mat-form-field>
   <mat-label>Veranstaltung adresse</mat-label>
   <mat-form-field>
     <input matInput [(ngModel)]="veranstaltung.adresse.land" required>
@@ -24,16 +28,9 @@
     <mat-form-field>
       <input matInput [(ngModel)]="veranstaltung.adresse.strasse" required>
     </mat-form-field>
-
-
-
-  <mat-label>Veranstaltung beschreibung</mat-label>
-  <mat-form-field>
-    <input matInput [(ngModel)]="veranstaltung.veranstaltung.beschreibung" required>
-  </mat-form-field>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button matButton (click)="onNoCLick()" >Nein</button>
-  <button matButton (click)="onYesClick()" cdkFocusInitial>Ja</button>
+  <button matButton (click)="onNoCLick()" >Abbrechen</button>
+  <button matButton (click)="onYesClick()" cdkFocusInitial>Speichern</button>
 </mat-dialog-actions>
