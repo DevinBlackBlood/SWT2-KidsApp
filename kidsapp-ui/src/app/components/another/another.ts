@@ -11,6 +11,5 @@ export class Another  {
   constructor(private markerService: MarkerService) {}
 
   handleClick() {
-    this.markerService.change([51.5, -0.09]); // Change map center
-  }
-}
+    this.markerService.change([51.5, -0.09]);
+  }}

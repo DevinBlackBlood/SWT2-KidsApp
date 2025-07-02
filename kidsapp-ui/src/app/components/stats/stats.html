@@ -1,0 +1,13 @@
+ <div class="stats-container"></div>
+   @for (stat of stats; track stat) {
+     <div class="stat-card">
+       <div class="stat-icon">{{ stat.icon }}</div>
+       <div class="stat-value">
+         <span class="counter">{{ stat.value }}</span>
+         @if (stat.suffix) {
+        <span>{{ stat.suffix }}</span>
+      }
+    </div>
+    <div class="stat-label">{{ stat.label }}</div>
+  </div>
+}
