@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimationService } from '../../services/animation';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,9 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./final-cta.css']
 })
 export class FinalCta implements OnInit {
-  constructor(private animation: AnimationService) {}
 
-  ngOnInit() {
-    this.animation.animateCTAButtons();
-  }
-}
+ngOnInit() {
+
+}}
