@@ -3,9 +3,7 @@ package com.swt1.bs.controller;
 import com.swt1.bs.entity.Veranstaltung;
 import com.swt1.bs.repository.VeranstaltungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +41,16 @@ public class VeranstaltungController {
         }
 
         return null;
+    }
+
+    @GetMapping("veranstaltungen/user/{id}")
+    public List<Veranstaltung> getVeranstaltungenForUser(@PathVariable Long id) {
+        return veranstaltungRepository.findVeranstaltungenForUser(id);
+    }
+
+    @GetMapping("veranstaltung/{eventId}/delete/user/{userId}/")
+    public void deleteVeranstaltungForUser(@PathVariable Long userId, @PathVariable Long eventId) {
+        veranstaltungRepository.deleteVeranstaltungForUser(userId, eventId);
     }
 
 
