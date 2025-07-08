@@ -1,24 +1,20 @@
 services:
   kidsapp-backend:
-    build:
-      context: ./kidsapp-backend
-      dockerfile: Dockerfile
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:f23c3718ffb96387cd07ab198b1e3f8b2565dcd4
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/kidsapp
     depends_on:
       - database
     ports:
       - "8080:8080"
   api-backend:
-    build:
-      context: ./api-backend
-      dockerfile: Dockerfile
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:f23c3718ffb96387cd07ab198b1e3f8b2565dcd4
     depends_on:
       - database
     ports:
       - "8081:8081"
   kidsapp-ui:
-    build:
-      context: ./kidsapp-ui
-      dockerfile: Dockerfile
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:f23c3718ffb96387cd07ab198b1e3f8b2565dcd4
     ports:
         - "80:80"
   database:
