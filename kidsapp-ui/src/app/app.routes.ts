@@ -1,3 +1,5 @@
+
+import { Home } from './pages/home/home';
 import {Routes} from '@angular/router';
 import { Leaflet } from './components/leaflet/leaflet';
 import { Welcome } from './components/welcome/welcome';
@@ -12,6 +14,12 @@ import {UserEventVerwaltungComponent} from './components/user-event-verwaltung/u
 
 export const routes: Routes = [
   { path: 'leaflet', component: Leaflet },
+   { path: 'test', component: Another },
+  { path: '', component: Welcome }, 
+  { 
+    path: 'home',
+    component: Home,
+  },
   { path: 'test', component: Another },
   { path: 'admin', component: Admin },
   { path: 'uev', component: UserEventVerwaltungComponent },

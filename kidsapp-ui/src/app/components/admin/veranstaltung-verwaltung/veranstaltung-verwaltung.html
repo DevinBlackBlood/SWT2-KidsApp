@@ -11,7 +11,6 @@
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>{{number.veranstaltungName}}</mat-card-title>
           <mat-card-subtitle>{{number.veranstalter?.veranstalterName}}</mat-card-subtitle>
-          <a>{{number.status}}</a>
         </mat-card-header>
         <mat-card-content>
           <p>
@@ -22,9 +21,14 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button matButton>EDITIEREN</button>
-          <button matButton>SPERREN</button>
-          <button matButton>LÖSCHEN</button>
+          <button matButton (click)="openEditDialog('0ms','0ms', number)">EDITIEREN</button>
+          @if (number.status == 'Inaktiv') {
+          <button matButton (click)="doSpeichern(number, true)">AKTIVIEREN</button>
+          }
+          @if (number.status == 'Aktiv') {
+          <button matButton (click)="doSpeichern(number, true)">SPERREN</button>
+          }
+          <button matButton (click)="openDialog('0ms','0ms', number.id!)">LÖSCHEN</button>
         </mat-card-actions>
       </mat-card>
     }
