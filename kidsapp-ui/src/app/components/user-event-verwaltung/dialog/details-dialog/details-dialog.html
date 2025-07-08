@@ -1,0 +1,38 @@
+<h3 mat-dialog-title>Event Details</h3>
+<mat-dialog-content>
+  <div style="display: flex; gap: 2rem;">
+    <div style="flex: 1;">
+      <mat-list>
+        <mat-list-item>
+          <span matListItemTitle>Ort</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemLine>{{data?.adresse?.ort}}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemLine>{{data?.adresse?.plz}}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemLine>{{data?.adresse?.strasse}}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div style="flex: 1;">
+      <mat-list>
+        <mat-list-item>
+          <span matListItemTitle>Veranstalter</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemLine>Veran Adresse</span>
+        </mat-list-item>
+        <mat-list-item>
+          <span matListItemLine>Veran Kontakt</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

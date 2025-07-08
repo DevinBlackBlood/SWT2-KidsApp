@@ -1,11 +1,20 @@
 .container{
   margin: 1.5rem;
-  border: black;
 }
 
+.card-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
 
-.example-card img.mat-card-image {
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
+.card {
+  max-width: 400px;
+  flex: 1;
+}
+
+.header-image {
+  background-image: url("/Veranstalter-temp.png");
+  background-size: cover;
 }
