@@ -1,0 +1,41 @@
+<div class="slider-container">
+      <div class="slider-wrapper">
+        <div 
+          class="slide"
+          *ngFor="let image of images; let i = index"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)">
+          <img [src]="image.url" [alt]="image.title" class="slide-image">
+          <div class="slide-content">
+            <h4>{{ image.title }}</h4>
+            <p>{{ image.description }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button 
+          (click)="previousSlide()"
+          class="control-btn prev-btn">
+          ❮
+        </button>
+        <button 
+          (click)="nextSlide()"
+          class="control-btn next-btn">
+          ❯
+        </button>
+      </div>
+
+      <div class="slider-dots">
+        <span 
+          *ngFor="let image of images; let i = index"
+          class="dot"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)">
+        </span>
+      </div>
+
+      <div class="slide-counter">
+        {{ currentSlide + 1 }} / {{ images.length }}
+      </div>
+    </div>

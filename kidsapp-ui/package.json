@@ -19,6 +19,7 @@
     "@angular/material": "~20.0.3",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
+    "@angular/service-worker": "^20.0.0",
     "@fortawesome/angular-fontawesome": "^2.0.1",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
@@ -26,6 +27,7 @@
     "@types/gsap": "^1.20.2",
     "gsap": "^3.13.0",
     "leaflet": "^1.9.4",
+    "ng-image-slider": "^10.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
