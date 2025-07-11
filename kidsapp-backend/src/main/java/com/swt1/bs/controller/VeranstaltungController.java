@@ -1,5 +1,7 @@
 package com.swt1.bs.controller;
 
+import com.swt1.bs.Gateway;
+import com.swt1.bs.MqttBeans;
 import com.swt1.bs.entity.Veranstaltung;
 import com.swt1.bs.repository.VeranstaltungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class VeranstaltungController {
 
     @Autowired
     private VeranstaltungRepository veranstaltungRepository;
+
+    @Autowired
+    private Gateway gateway;
 
     @GetMapping("veranstaltungen")
     public List<Veranstaltung> veranstaltungen() {
@@ -53,6 +58,12 @@ public class VeranstaltungController {
         veranstaltungRepository.deleteVeranstaltungForUser(userId, eventId);
     }
 
+    @GetMapping("/test")
+    public String testMQTT() {
+        System.out.println("TEST-Endpoint aufgerufen!");
+        gateway.sendToMqtt("DER TEEEEEEEEEEEESTTTTTTTTTTT");
+        return "Nachricht gesendet!";
+    }
 
 
 
