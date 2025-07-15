@@ -37,5 +37,8 @@ public class Veranstaltung {
     )
     private List<Benutzer> benutzer;
 
+    @ManyToMany(mappedBy = "favoriten")
+    private List<Benutzer> favorisiertVon;
+
 
 }

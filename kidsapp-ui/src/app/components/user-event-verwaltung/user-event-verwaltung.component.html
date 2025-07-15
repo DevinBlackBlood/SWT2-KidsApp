@@ -14,6 +14,8 @@
             <p>{{Veranstaltung.beschreibung}}</p>
           </mat-card-content>
           <mat-card-actions>
+            <button matButton (click)="favorite(Veranstaltung.id)">Favorisieren</button>
+
             <button matButton (click)="cancelBooking(Veranstaltung.id)">Stornieren</button>
           </mat-card-actions>
         </mat-card>

@@ -58,6 +58,10 @@ export class UserEventVerwaltungComponent implements OnInit {
   })
 }
 
+  favorite(id: number | undefined){
+
+    }
+
 
   cancelBooking(id: number | undefined) {
     let dialogRef = this.dialog.open(ConfirmDialog);

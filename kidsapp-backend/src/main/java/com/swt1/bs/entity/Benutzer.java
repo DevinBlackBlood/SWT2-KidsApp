@@ -45,4 +45,12 @@ public class Benutzer {
 
     @ManyToMany(targetEntity = Chat.class)
     private List<Chat> chats;
+
+    @ManyToMany
+    @JoinTable(
+            name = "benutzer_favoriten",
+            joinColumns = @JoinColumn(name = "benutzer_id"),
+            inverseJoinColumns = @JoinColumn(name = "veranstaltung_id")
+    )
+    private List<Veranstaltung> favoriten;
 }
