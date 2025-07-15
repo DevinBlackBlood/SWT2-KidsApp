@@ -32,11 +32,12 @@ export class Search implements  OnInit {
 filteredDatasource: Veranstaltung[] = [];
   ngOnInit() {
 
-    this.veranstaltungControllerService.veranstaltungen().subscribe( e => {
+    this.veranstaltungControllerService.getVeranstaltungenByStatus("Aktiv").subscribe( e => {
 
       this.datasource = e;
       this.filteredDatasource = e;
     })
+
 
   }
 

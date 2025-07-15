@@ -7,6 +7,8 @@ import com.swt1.bs.repository.VeranstaltungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,25 +35,40 @@ public class VeranstaltungService {
         return false;
     }
 
-    public Optional<Chat> getVeranstalterChat(Veranstaltung veranstaltung) {
-        return chatRepository.findById(1L);
-    }
 
-    public Veranstaltung addVeranstaltung(Veranstaltung veranstaltung) {
-        return veranstaltungRepository.save(veranstaltung);
-    }
 
-    public List<Veranstaltung> findAllVeranstaltungen() {
-        return (List<Veranstaltung>) veranstaltungRepository.findAll();
-    }
 
-    public Veranstaltung updateVeranstaltung(Veranstaltung veranstaltung) {
-        return veranstaltungRepository.save(veranstaltung);
-    }
+    public boolean loeschenVeranstaltung(Long id) {
+        Optional<Veranstaltung> v = veranstaltungRepository.findById(id);
 
-    public void deleteVeranstaltung(Veranstaltung veranstaltung) {
-        veranstaltungRepository.delete(veranstaltung);
+        if(v.isPresent()) {
+            veranstaltungRepository.delete(v.get());
+            return true;
+        }
+        return false;
     }
 
 
+    public Veranstaltung speichernVeranstaltung(Veranstaltung newVeranstaltung) {
+
+        if (veranstaltungRepository.findById(newVeranstaltung.getId()).isPresent()){
+
+            return  veranstaltungRepository.save(newVeranstaltung);
+        }
+
+        return null;
+    }
+
+    public List<Veranstaltung> getVeranstaltungenByStatus(String status) {
+        return veranstaltungRepository.findVeranstaltungByStatus(status);
+    }
+
+    public List<Veranstaltung> getVeranstaltungenForUser( Long id) {
+        return veranstaltungRepository.findVeranstaltungenForUser(id);
+    }
+
+
+    public void deleteVeranstaltungForUser( Long userId, Long eventId) {
+        veranstaltungRepository.deleteVeranstaltungForUser(userId, eventId);
+    }
 }

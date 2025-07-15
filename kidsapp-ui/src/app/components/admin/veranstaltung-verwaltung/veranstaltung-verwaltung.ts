@@ -67,7 +67,7 @@ export class VeranstaltungVerwaltung implements OnInit{
   }
 
   doSpeichern(veranstaltung: Veranstaltung, tag: boolean) {
-    console.log("test")
+
     if(tag){
       if (veranstaltung.status == 'Inaktiv'){
       veranstaltung.status = 'Aktiv'
@@ -75,7 +75,7 @@ export class VeranstaltungVerwaltung implements OnInit{
       }
       else {
         veranstaltung.status = 'Inaktiv'
-        console.log("test")
+
       }
     }
 

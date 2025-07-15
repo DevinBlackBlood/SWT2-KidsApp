@@ -16,6 +16,8 @@ public interface VeranstaltungRepository extends CrudRepository<Veranstaltung, L
     @Query(value = "select * from public.veranstaltung v join public.veranstaltung_benutzer vb on v.id = vb.veranstaltung_id where vb.benutzer_id = :id", nativeQuery = true)
     List<Veranstaltung> findVeranstaltungenForUser(@Param("id") Long id);
 
+    List<Veranstaltung> findVeranstaltungByStatus(@Param("status")String status);
+
     @Transactional
     @Modifying
     @Query(value = "delete from public.veranstaltung_benutzer vb where vb.benutzer_id = :userId and vb.veranstaltung_id = :eventId;", nativeQuery = true)
