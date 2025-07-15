@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ImageSlider } from '../../components/image-slider/image-slider';
 import { Leaflet } from "../../components/leaflet/leaflet";
 import { Search } from "../../components/search/search";  // Pfad prüfen
-import { OwlOptions } from 'ngx-owl-carousel-o';
+
 @Component({
   selector: 'app-home',
   standalone: true,
