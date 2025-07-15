@@ -1,5 +1,7 @@
 package com.swt1.bs;
 
+import com.swt1.bs.repository.VeranstaltungRepository;
+import com.swt1.bs.service.VeranstaltungService;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +29,8 @@ import java.util.UUID;
 @Configuration
 public class MqttBeans {
 
+    @Autowired
+    VeranstaltungService veranstaltungService;
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
@@ -68,9 +72,8 @@ public class MqttBeans {
         return new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
-                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-
-                System.out.println(message.getPayload());
+//                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
+                veranstaltungService.verarbeiteNachricht(message.getPayload().toString());
             }
         };
     }

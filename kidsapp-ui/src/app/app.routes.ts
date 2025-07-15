@@ -15,17 +15,17 @@ import {UserEventVerwaltungComponent} from './components/user-event-verwaltung/u
 export const routes: Routes = [
   { path: 'leaflet', component: Leaflet },
    { path: 'test', component: Another },
-  { path: '', component: Welcome }, 
-  { 
+  { path: '', component: Welcome },
+  {
     path: 'home',
     component: Home,
   },
   { path: 'test', component: Another },
   { path: 'admin', component: Admin },
-  { path: 'uev', component: UserEventVerwaltungComponent },
+  { path: 'user/events/verwaltung', component: UserEventVerwaltungComponent },
   { path: '', component: Welcome },
   { path: 'user/verwaltung', component: UserVerwaltung },
   { path: 'veranstaltung/verwaltung', component: VeranstaltungVerwaltung },
   { path: 'rechnungen/verwaltung', component: RechungVerwaltung },
-  { path: 'antraege/verwaltung', component: AntraegeVerwaltung },
+    { path: 'antraege/verwaltung', component: AntraegeVerwaltung },
 ];

@@ -47,7 +47,7 @@ export class UserEventVerwaltungComponent implements OnInit {
   }
 
   dataInit() {
-    this.veranstaltungService.getVeranstaltungenForUser(1).subscribe(data => {
+    this.veranstaltungService.getVeranstaltungenForUser(10).subscribe(data => {
       this.veranstaltungen = data;
       this.veranstaltungen = [...this.veranstaltungen]
     })

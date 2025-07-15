@@ -1,13 +1,18 @@
 package com.swt1.bs.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.swt1.bs.dto.VeranstaltungDTO;
 import com.swt1.bs.entity.Chat;
 import com.swt1.bs.entity.Veranstaltung;
 import com.swt1.bs.repository.ChatRepository;
 import com.swt1.bs.repository.VeranstaltungRepository;
+import com.swt1.bs.utils.Adresse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +56,31 @@ public class VeranstaltungService {
 
     public void deleteVeranstaltung(Veranstaltung veranstaltung) {
         veranstaltungRepository.delete(veranstaltung);
+    }
+
+    public void verarbeiteNachricht(String jsonPayload) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            VeranstaltungDTO[] produkte = objectMapper.readValue(jsonPayload, VeranstaltungDTO[].class);
+
+            for (VeranstaltungDTO p : produkte) {
+                Veranstaltung v = new Veranstaltung();
+                v.setVeranstaltungName(p.name);
+
+                if (p.data != null) {
+                    v.setBeschreibung(objectMapper.writeValueAsString(p.data));
+                } else {
+                    v.setBeschreibung("Keine Detaildaten vorhanden");
+                }
+
+                veranstaltungRepository.save(v);
+                System.out.println("Veranstaltung gespeichert: " + v.getVeranstaltungName());
+            }
+
+        } catch (Exception e) {
+            System.err.println("Fehler beim Parsen/Speichern: " + e.getMessage());
+        }
     }
 
 

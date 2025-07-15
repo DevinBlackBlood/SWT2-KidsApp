@@ -1,7 +1,6 @@
 package com.swt1.bs.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,8 +24,8 @@ public class Ticket {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Veranstaltung veranstaltung;
 
-    @OneToOne(targetEntity = Rechung.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Rechung rechung;
+    @OneToOne(targetEntity = Rechnung.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Rechnung rechung;
 
     @ManyToMany(targetEntity = Benutzer.class)
     private List<Benutzer> benutzers;

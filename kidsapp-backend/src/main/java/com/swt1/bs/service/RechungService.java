@@ -1,15 +1,12 @@
 package com.swt1.bs.service;
 
 import com.swt1.bs.entity.Buchungsformular;
-import com.swt1.bs.entity.Rechung;
+import com.swt1.bs.entity.Rechnung;
 import com.swt1.bs.entity.Ticket;
-import com.swt1.bs.repository.BenutzerRepository;
 import com.swt1.bs.repository.RechungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -27,7 +24,7 @@ public class RechungService {
 
     }
 
-    public Rechung addRechung(Rechung rechung) {
+    public Rechnung addRechung(Rechnung rechung) {
         if (rechung != null) {
             rechungRepository.save(rechung);
         }
@@ -35,12 +32,12 @@ public class RechungService {
         return null;
     }
 
-    public List<Rechung> getRechungen() {
+    public List<Rechnung> getRechungen() {
 
-        return (List<Rechung>) rechungRepository.findAll();
+        return (List<Rechnung>) rechungRepository.findAll();
     }
 
-    public Rechung getRechung(Long id) {
+    public Rechnung getRechung(Long id) {
 
         if (id >= 1 && rechungRepository.existsById(id)) {
             return rechungRepository.findById(id).get();
@@ -48,7 +45,7 @@ public class RechungService {
         return null;
     }
 
-    public Rechung updateRechungById(Long id, Rechung rechung) {
+    public Rechnung updateRechungById(Long id, Rechnung rechung) {
 
         if (rechung != null && id >= 1 && rechungRepository.existsById(id)) {
 

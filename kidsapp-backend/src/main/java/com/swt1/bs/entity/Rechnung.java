@@ -1,8 +1,6 @@
 package com.swt1.bs.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.swt1.bs.utils.Anschrift;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,7 +9,7 @@ import java.sql.Time;
 
 @Entity
 @Data
-public class Rechung {
+public class Rechnung {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
