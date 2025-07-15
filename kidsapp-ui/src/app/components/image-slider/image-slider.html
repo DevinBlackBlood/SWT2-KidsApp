@@ -1,41 +1,23 @@
 <div class="slider-container">
-      <div class="slider-wrapper">
-        <div 
-          class="slide"
-          *ngFor="let image of images; let i = index"
-          [class.active]="i === currentSlide"
-          (click)="goToSlide(i)">
-          <img [src]="image.url" [alt]="image.title" class="slide-image">
-          <div class="slide-content">
-            <h4>{{ image.title }}</h4>
-            <p>{{ image.description }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="slider-controls">
-        <button 
-          (click)="previousSlide()"
-          class="control-btn prev-btn">
-          ❮
-        </button>
-        <button 
-          (click)="nextSlide()"
-          class="control-btn next-btn">
-          ❯
-        </button>
-      </div>
-
-      <div class="slider-dots">
-        <span 
-          *ngFor="let image of images; let i = index"
-          class="dot"
-          [class.active]="i === currentSlide"
-          (click)="goToSlide(i)">
-        </span>
-      </div>
-
-      <div class="slide-counter">
-        {{ currentSlide + 1 }} / {{ images.length }}
+  <h1 class="slider-title">Neueste Events</h1>
+  
+  <div class="slider">
+    <div class="slide">
+      <div class="slide-content">
+        <img [src]="slides[currentIndex].image" [alt]="slides[currentIndex].title">
+        <h2 class="slide-title">{{ slides[currentIndex].title }}</h2>
       </div>
     </div>
+    
+    <button class="nav-btn prev-btn" (click)="prevSlide()">❮</button>
+    <button class="nav-btn next-btn" (click)="nextSlide()">❯</button>
+  </div>
+  
+  <div class="indicators">
+    <span 
+      *ngFor="let slide of slides; let i = index"
+      [class.active]="i === currentIndex"
+      (click)="goToSlide(i)">
+    </span>
+  </div>
+</div>

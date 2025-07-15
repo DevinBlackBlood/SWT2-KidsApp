@@ -1,173 +1,64 @@
-   .app-container {
-      min-height: 100vh;
-      background: #f5f5f5;
-      font-family: 'Arial', sans-serif;
-    }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  background-color: #ffffff;
+  
+}
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: white;
-      border-bottom: 2px solid #333;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+.top-section {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
 
-    .logo h1 {
-      color: #e74c3c;
-      margin: 0;
-      font-size: 1.8rem;
-    }
+.box {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .home-btn {
-      background: #3498db;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
+.search-box {
+  width: 400px;
+}
 
-    .home-btn:hover {
-      background: #2980b9;
-    }
+.events-box {
+  
+  width: 500px;
+}
 
-    .auth-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: #e74c3c;
-    }
+.events-box h3 {
+  text-align: center;
+  height: fit-content;
+  margin-top: 0;
+  color: #cc0000;
+}
 
-    .auth-text {
-      font-size: 1.1rem;
-    }
+.map-section {
+  margin-top: 1rem;
+  text-align: center;
+}
 
-    .profile-icon {
-      width: 40px;
-      height: 40px;
-      background: #333;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-    }
+.map-box {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 900px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fefefe;
+}
 
-    .main-content {
-      padding: 2rem;
-    }
-
-    .content-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .page-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .page-title h2 {
-      color: #333;
-      font-size: 2rem;
-      margin: 0;
-    }
-
-    .top-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .search-section {
-      background: white;
-      padding: 1.5rem;
-      border: 2px solid #333;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .slider-section {
-      background: white;
-      padding: 1.5rem;
-      border: 2px solid #333;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .slider-section h3 {
-      color: #e74c3c;
-      margin: 0 0 1rem 0;
-      font-size: 1.3rem;
-    }
-
-    .map-section {
-      background: white;
-      padding: 1.5rem;
-      border: 2px solid #333;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .map-section h3 {
-      color: #e74c3c;
-      margin: 0 0 1rem 0;
-      font-size: 1.8rem;
-      text-align: center;
-    }
-
-    /* Custom styles for ng-image-slider */
-    .ng-image-slider-container .main {
-      height: 250px !important;
-      border-radius: 6px;
-    }
-
-    .ng-image-slider-container .img-div {
-      border-radius: 6px !important;
-    }
-
-    .ng-image-slider .nav-btn {
-      background: rgba(255,255,255,0.8) !important;
-      border-radius: 50% !important;
-      width: 40px !important;
-      height: 40px !important;
-      color: #333 !important;
-    }
-
-    .ng-image-slider .nav-btn:hover {
-      background: white !important;
-    }
-
-    .ng-image-slider-container .lightbox {
-      background-color: rgba(0,0,0,0.9) !important;
-    }
-
-    @media (max-width: 768px) {
-      .header {
-        padding: 1rem;
-      }
-
-      .logo h1 {
-        font-size: 1.4rem;
-      }
-
-      .top-section {
-        grid-template-columns: 1fr;
-      }
-
-      .main-content {
-        padding: 1rem;
-      }
-    }
+.slider-controls {
+  margin-top: 1rem;
+  text-align: center;
+}

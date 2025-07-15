@@ -1,59 +1,55 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-interface SlideImage {
-  url: string;
-  title: string;
-  description: string;
-}
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-image-slider',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './image-slider.html',
   styleUrls: ['./image-slider.css']
 })
-
-export class ImageSlider implements OnInit, OnDestroy {
-  @Input() images: SlideImage[] = [];
-  @Input() autoPlay = false;
-  @Input() interval = 3000;
-
-  currentSlide = 0;
-  private autoPlayInterval: any;
-
-  ngOnInit() {
-    if (this.autoPlay) {
-      this.startAutoPlay();
+export class ImageSlider implements OnInit {
+  slides =[
+    { 
+      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      title: 'Spielplatzfest am Samstag',
+      date: '15. Juli 2023',
+      time: '14:00 - 18:00 Uhr',
+      location: 'Stadtpark Spielplatz',
+      description: 'Spiele, Musik und Essen für die ganze Familie!'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      title: 'Familientag im Park',
+      date: '22. Juli 2023',
+      time: '11:00 - 17:00 Uhr',
+      location: 'Central Park',
+      description: 'Workshops, Spiele und Aktivitäten für alle Altersgruppen'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
+      title: 'Kinderkonzert in der Innenstadt',
+      date: '29. Juli 2023',
+      time: '10:00 - 12:00 Uhr',
+      location: 'Stadtplatz',
+      description: 'Live-Musik speziell für unsere kleinen Gäste'
     }
+  ];
+
+
+
+  currentIndex = 0;
+  interval: any;
+
+  ngOnInit(): void {
+ 
+  }
+  nextSlide(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.slides.length;
   }
 
-  ngOnDestroy() {
-    this.stopAutoPlay();
+  prevSlide(): void {
+    this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
   }
 
-  nextSlide() {
-    this.currentSlide = (this.currentSlide + 1) % this.images.length;
-  }
-
-  previousSlide() {
-    this.currentSlide = this.currentSlide === 0 ? this.images.length - 1 : this.currentSlide - 1;
-  }
-
-  goToSlide(index: number) {
-    this.currentSlide = index;
-  }
-
-  private startAutoPlay() {
-    this.autoPlayInterval = setInterval(() => {
-      this.nextSlide();
-    }, this.interval);
-  }
-
-  private stopAutoPlay() {
-    if (this.autoPlayInterval) {
-      clearInterval(this.autoPlayInterval);
-    }
+  goToSlide(index: number): void {
+    this.currentIndex = index;
   }
 }

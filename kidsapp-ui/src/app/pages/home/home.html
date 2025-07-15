@@ -1,41 +1,20 @@
- <!-- Main Content -->
-    <main class="main-content">
-      <div class="content-wrapper">
-        <!-- Title -->
-        <div class="page-title">
-          <h2>KidsApp Home</h2>
-        </div>
+<h2>KidsApp Home</h2>
+<div class="home-container">
+ 
+<div class="top-section">
+  <div class="box "> <app-search></app-search></div>
+ 
+  <div class="box events-box">
+   <app-image-slider></app-image-slider>
 
-        <!-- Top Section -->
-        <div class="top-section">
-          <!-- Search Component -->
-          <div class="search-section">
-            <app-search 
-              (searchEvent)="onSearch($event)"
-              (locationFound)="onLocationFound($event)">
-            </app-search>
-          </div>
+  </div>
+</div>
 
-          <!-- Image Slider -->
-             <div class="slider-section">
-              <h3>Neueste Events</h3>
-              <ng-image-slider 
-                [images]="eventImages"
-                [infinite]="true"
-                [autoSlide]="{interval: 3, stopOnHover: true}"
-                [imagePopup]="true"
-                [showArrow]="true"
-                [animationSpeed]="0.5"
-                [imageSize]="{width: '100%', height: '250px', space: 0}"
-                (imageClick)="onImageClick($event)">
-              </ng-image-slider>
-            </div>
-          </div>
-
-        <!-- Map Section -->
-        <div class="map-section">
-          <h3>Map</h3>
-          <app-leaflet></app-leaflet>
-        </div>
-      </div>
-    </main>
+<div class="map-section">
+  <div class="map-box">
+    <div id="map" style="height: 500px;">
+      <app-leaflet></app-leaflet>
+    </div>
+  </div>
+</div>
+</div>
