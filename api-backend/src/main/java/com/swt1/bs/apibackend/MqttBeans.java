@@ -51,9 +51,8 @@ public class MqttBeans {
 
     @Bean
     public MessageProducer inbound() {
-        // Hier abonniert das API-Backend die Topics, um Nachrichten vom kidsapp-backend zu empfangen
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-                "api-client", mqttClientFactory(), "api-to-kidsapp", "kidsapp-to-api");
+                "api-client", mqttClientFactory(), "api-to-kidsapp");
 
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
