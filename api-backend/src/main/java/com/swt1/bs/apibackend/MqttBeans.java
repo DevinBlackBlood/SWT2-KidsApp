@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.integration.annotation.MessagingGateway;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
@@ -25,10 +26,6 @@ import java.util.UUID;
 
 @Configuration
 public class MqttBeans {
-
-    @Autowired
-    @Qualifier("mqttOutboundChannel")
-    private MessageChannel mqttOutboundChannel;
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
@@ -86,6 +83,7 @@ public class MqttBeans {
     }
 
     @Bean
+    @Lazy
     public MessageChannel mqttOutboundChannel() {
         return new DirectChannel();
     }
@@ -105,6 +103,6 @@ public class MqttBeans {
                 .setHeader(MqttHeaders.TOPIC, "api-to-kidsapp")
                 .build();
 
-        mqttOutboundChannel.send(message);
+        mqttOutboundChannel().send(message);
     }
 }
