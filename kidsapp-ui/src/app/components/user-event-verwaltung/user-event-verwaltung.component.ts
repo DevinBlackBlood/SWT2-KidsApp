@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {
   MatCard,
   MatCardActions,
@@ -10,8 +10,13 @@ import {
 } from '@angular/material/card';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import {Router, ActivatedRoute } from '@angular/router';
-import {Veranstalter, Veranstaltung, VeranstaltungControllerService} from '../../../../src-gen/bsclient';
+import {ActivatedRoute, Router} from '@angular/router';
+import {
+  BenutzerControllerService,
+  Veranstalter,
+  Veranstaltung,
+  VeranstaltungControllerService
+} from '../../../../src-gen/bsclient';
 import {ConfirmDialog} from './dialog/confirm-dialog/confirm-dialog';
 import {DetailsDialog} from './dialog/details-dialog/details-dialog';
 
@@ -36,12 +41,13 @@ export class UserEventVerwaltungComponent implements OnInit {
 
   veranstaltungen: Veranstaltung[] = [];
   veranstalter: Veranstalter[] = [];
+  favoriten: Veranstaltung[] = [];
 
   userId: number = 0;
 
   readonly dialog = inject(MatDialog);
 
-  constructor(public router: Router, public veranstaltungService: VeranstaltungControllerService, private route: ActivatedRoute) {
+  constructor(public router: Router, public benutzerService: BenutzerControllerService,public veranstaltungService: VeranstaltungControllerService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -50,17 +56,29 @@ export class UserEventVerwaltungComponent implements OnInit {
 
   dataInit() {
     this.route.paramMap.subscribe(params => {
-        this.userId = Number(this.route.snapshot.paramMap.get('id'));
-    this.veranstaltungService.getVeranstaltungenForUser(this.userId).subscribe(data => {
-      this.veranstaltungen = data;
-      this.veranstaltungen = [...this.veranstaltungen]
+      this.userId = Number(this.route.snapshot.paramMap.get('id'));
+      this.veranstaltungService.getVeranstaltungenForUser(this.userId).subscribe(data => {
+        this.veranstaltungen = data;
+        this.veranstaltungen = [...this.veranstaltungen]
+      })
     })
-  })
-}
+  }
 
-  favorite(id: number | undefined){
-
-    }
+  favorite(favoriteId: number) {
+    let dialogRef = this.dialog.open(ConfirmDialog);
+    let favId: number = favoriteId;
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        if (this.userId != null && favId != null) {
+          this.benutzerService.fuegeFavoritHinzu(this.userId, favoriteId)
+            .subscribe({
+              next: () => console.log("Erfolgreich hinzugefügt"),
+              error: err => console.error("Fehler beim Hinzufügen:", err)
+            });
+        }
+      }
+    })
+  }
 
 
   cancelBooking(id: number | undefined) {
@@ -85,6 +103,13 @@ export class UserEventVerwaltungComponent implements OnInit {
   }
 
   openDetails(veranstaltung: Veranstaltung) {
-    this.dialog.open(DetailsDialog, { data: veranstaltung });
+    this.dialog.open(DetailsDialog, {data: veranstaltung});
+  }
+
+  switchEventsToFavorites(veranstaltungen: Veranstaltung[]) {
+    this.benutzerService.getFavoritesForUser(this.userId).subscribe(favs => {
+      this.veranstaltungen = favs;
+      this.veranstaltungen = [...this.veranstaltungen];
+    });
   }
 }

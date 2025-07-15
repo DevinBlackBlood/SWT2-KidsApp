@@ -3,7 +3,7 @@ export * from './anschrift';
 export * from './benutzer';
 export * from './chat';
 export * from './nachricht';
-export * from './rechung';
+export * from './rechnung';
 export * from './ticket';
 export * from './veranstalter';
 export * from './veranstaltung';

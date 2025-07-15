@@ -36,9 +36,4 @@ public class Veranstaltung {
             inverseJoinColumns = @JoinColumn(name = "benutzer_id")
     )
     private List<Benutzer> benutzer;
-
-    @ManyToMany(mappedBy = "favoriten")
-    private List<Benutzer> favorisiertVon;
-
-
 }

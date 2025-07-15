@@ -1,5 +1,6 @@
 <div class="container">
   <h2>Event verwaltung</h2>
+  <button style="margin-top: 10px; margin-bottom: 10px" (click)="switchEventsToFavorites(veranstaltungen)" mat-raised-button>Favoriten</button>
   <div class="card-container">
     @if (veranstaltungen.length > 0) {
       @for (Veranstaltung of veranstaltungen; track Veranstaltung.id) {
@@ -14,7 +15,7 @@
             <p>{{Veranstaltung.beschreibung}}</p>
           </mat-card-content>
           <mat-card-actions>
-            <button matButton (click)="favorite(Veranstaltung.id)">Favorisieren</button>
+            <button matButton (click)="favorite(Veranstaltung.id ?? 0)">Favorisieren</button>
 
             <button matButton (click)="cancelBooking(Veranstaltung.id)">Stornieren</button>
           </mat-card-actions>

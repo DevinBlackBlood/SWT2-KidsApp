@@ -14,7 +14,7 @@ model/benutzer.ts
 model/chat.ts
 model/models.ts
 model/nachricht.ts
-model/rechung.ts
+model/rechnung.ts
 model/ticket.ts
 model/veranstalter.ts
 model/veranstaltung.ts

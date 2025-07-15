@@ -9,7 +9,7 @@
  */
 import { Veranstaltung } from './veranstaltung';
 import { Benutzer } from './benutzer';
-import { Rechung } from './rechung';
+import { Rechnung } from './rechnung';
 
 
 export interface Ticket { 
@@ -18,7 +18,7 @@ export interface Ticket {
     qeCode?: string;
     teilnehmerAnzahl?: number;
     veranstaltung?: Veranstaltung;
-    rechung?: Rechung;
+    rechung?: Rechnung;
     benutzers?: Array<Benutzer>;
 }
 

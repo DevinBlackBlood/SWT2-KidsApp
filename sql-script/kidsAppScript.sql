@@ -35,16 +35,16 @@ INSERT INTO public.veranstalter (id, email, telefonnummer, veranstalter_name, ad
 (10, 'kontakt10@veranstalter.de', '0301234570', 'Event GmbH 10', 10);
 
 INSERT INTO public.veranstaltung (id, beschreibung, status, veranstaltung_name, adresse_id, veranstalter_id) VALUES
-(1, 'Sommerfest', 'geplant', 'Sommerfest 2025', 1, 1),
-(2, 'Tech-Konferenz', 'aktiv', 'TechDays 2025', 2, 1),
-(3, 'Food-Festival', 'abgeschlossen', 'Foodie Days', 3, 1),
-(4, 'Musiknacht', 'geplant', 'Night of Music', 4, 2),
-(5, 'Kunstmesse', 'aktiv', 'Art Expo', 5, 2),
-(6, 'Startup-Pitch', 'geplant', 'Pitch Night', 6, 3),
-(7, 'Marathon', 'abgeschlossen', 'City Run', 7, 3),
-(8, 'Buchmesse', 'aktiv', 'Book World', 8, 4),
-(9, 'Umweltkongress', 'geplant', 'Green Future', 9, 4),
-(10, 'Filmfestival', 'aktiv', 'CineVision', 10, 5);
+(1, 'Sommerfest', 'Aktiv', 'Sommerfest 2025', 1, 1),
+(2, 'Tech-Konferenz', 'Aktiv', 'TechDays 2025', 2, 1),
+(3, 'Food-Festival', 'Inaktiv', 'Foodie Days', 3, 1),
+(4, 'Musiknacht', 'Aktiv', 'Night of Music', 4, 2),
+(5, 'Kunstmesse', 'Aktiv', 'Art Expo', 5, 2),
+(6, 'Startup-Pitch', 'Aktiv', 'Pitch Night', 6, 3),
+(7, 'Marathon', 'Inaktiv', 'City Run', 7, 3),
+(8, 'Buchmesse', 'Aktiv', 'Book World', 8, 4),
+(9, 'Umweltkongress', 'Aktiv', 'Green Future', 9, 4),
+(10, 'Filmfestival', 'Aktiv', 'CineVision', 10, 5);
 
 INSERT INTO public.chat (id, gruppenbild, "name") VALUES
 (1, NULL, 'Allgemein'),
