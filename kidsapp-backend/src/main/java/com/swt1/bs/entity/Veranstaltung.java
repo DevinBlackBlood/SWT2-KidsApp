@@ -28,8 +28,13 @@ public class Veranstaltung {
     @ManyToOne(fetch = FetchType.EAGER)
     private Veranstalter veranstalter;
 
-    @OneToMany(targetEntity = Benutzer.class)
+    @ManyToMany(targetEntity = Benutzer.class)
     @Nullable
+    @JoinTable(
+            name = "veranstaltung_benutzer",
+            joinColumns = @JoinColumn(name = "veranstaltung_id"),
+            inverseJoinColumns = @JoinColumn(name = "benutzer_id")
+    )
     private List<Benutzer> benutzer;
 
 

@@ -73,6 +73,7 @@ public class MqttBeans {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
 //                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
+                System.err.println(message.getPayload().toString());
                 veranstaltungService.verarbeiteNachricht(message.getPayload().toString());
             }
         };

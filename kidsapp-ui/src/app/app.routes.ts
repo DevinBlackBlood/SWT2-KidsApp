@@ -22,7 +22,7 @@ export const routes: Routes = [
   },
   { path: 'test', component: Another },
   { path: 'admin', component: Admin },
-  { path: 'user/events/verwaltung', component: UserEventVerwaltungComponent },
+  { path: 'user/:id/events/verwaltung', component: UserEventVerwaltungComponent },
   { path: '', component: Welcome },
   { path: 'user/verwaltung', component: UserVerwaltung },
   { path: 'veranstaltung/verwaltung', component: VeranstaltungVerwaltung },
