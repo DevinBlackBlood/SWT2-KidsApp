@@ -1,4 +1,4 @@
-package com.swt1.bs;
+package com.swt1.bs.apibackend;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,6 @@ public class MqttBeans {
     @Qualifier("mqttOutboundChannel")
     private MessageChannel mqttOutboundChannel;
 
-
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -55,8 +54,9 @@ public class MqttBeans {
 
     @Bean
     public MessageProducer inbound() {
+        // Hier abonniert das API-Backend die Topics, um Nachrichten vom kidsapp-backend zu empfangen
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-                "kidsapp-client", mqttClientFactory(), "kidsapp-to-api",  "api-to-kidsapp");
+                "api-client", mqttClientFactory(), "api-to-kidsapp", "kidsapp-to-api");
 
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
@@ -72,12 +72,15 @@ public class MqttBeans {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
                 String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                if (topic.equals("kidsapp-to-api")) {
-                    System.out.println("This is my topic");
-                }
-                System.out.println("MQTT empfangen!!!!!!!!!!!!!!!!!!!!!!!!!: " + message.getPayload());
 
-                System.out.println(message.getPayload());
+                System.out.println("MQTT Nachricht im API-Backend empfangen auf Topic: " + topic);
+                System.out.println("Payload: " + message.getPayload());
+
+                if (topic.equals("api-to-kidsapp")) {
+                    System.out.println("Nachricht vom API-Backend an kidsapp-backend erhalten");
+                } else if (topic.equals("kidsapp-to-api")) {
+                    System.out.println("Antwort vom kidsapp-backend erhalten");
+                }
             }
         };
     }
@@ -90,16 +93,16 @@ public class MqttBeans {
     @Bean
     @ServiceActivator(inputChannel = "mqttOutboundChannel")
     public MessageHandler mqttOutbound() {
-        MqttPahoMessageHandler handler = new MqttPahoMessageHandler("kidsapp-outbound-client" + UUID.randomUUID(), mqttClientFactory());
+        MqttPahoMessageHandler handler = new MqttPahoMessageHandler("api-serverOut" + UUID.randomUUID(), mqttClientFactory());
 
         handler.setAsync(true);
-        handler.setDefaultTopic("kidsapp-to-api");
+        handler.setDefaultTopic("api-to-kidsapp");
         return handler;
     }
 
-    public void sendeNachricht(String payload) {
+    public void sendeNachrichtAnKidsapp(String payload) {
         Message<String> message = MessageBuilder.withPayload(payload)
-                .setHeader(MqttHeaders.TOPIC, "kidsapp-to-api")  // ggf. dynamisch setzen
+                .setHeader(MqttHeaders.TOPIC, "api-to-kidsapp")
                 .build();
 
         mqttOutboundChannel.send(message);
