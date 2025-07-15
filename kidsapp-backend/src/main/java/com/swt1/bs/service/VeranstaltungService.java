@@ -60,7 +60,7 @@ public class VeranstaltungService {
     }
 
     public List<Veranstaltung> getVeranstaltungenByStatus(String status) {
-        return veranstaltungRepository.findVeranstaltungByStatus(status);
+        return veranstaltungRepository.findVeranstaltungByStatusIgnoreCase(status);
     }
 
     public List<Veranstaltung> getVeranstaltungenForUser( Long id) {
