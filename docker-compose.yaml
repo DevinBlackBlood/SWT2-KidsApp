@@ -1,26 +1,32 @@
+networks:
+  kidsapp-net:
+
 services:
   kidsapp-backend:
-    build:
-      context: ./kidsapp-backend
-      dockerfile: Dockerfile
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:83ab6c04916bc13ab039e1f8fa4ea03f1e5ab4d7
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/kidsapp
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: korkmaz
     depends_on:
       - database
+      - mqtt-broker
     ports:
       - "8080:8080"
+    networks:
+      - kidsapp-net
   api-backend:
-    build:
-      context: ./api-backend
-      dockerfile: Dockerfile
-    depends_on:
-      - database
+    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:83ab6c04916bc13ab039e1f8fa4ea03f1e5ab4d7
     ports:
       - "8081:8081"
+    networks:
+      - kidsapp-net
   kidsapp-ui:
-    build:
-      context: ./kidsapp-ui
-      dockerfile: Dockerfile
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:83ab6c04916bc13ab039e1f8fa4ea03f1e5ab4d7
     ports:
         - "80:80"
+    networks:
+      - kidsapp-net
   database:
     image: postgres:latest
     ports:
@@ -32,17 +38,15 @@ services:
       POSTGRES_DB: kidsapp
     volumes:
       - ./postgres:/var/lib/postgresql/data
+    networks:
+      - kidsapp-net
   mqtt-broker:
     depends_on:
       - database
     image: eclipse-mosquitto:latest
     restart: always
-    deploy:
-      resources:
-        limits:
-          memory: 256M
     ports:
-      - "1883:1833"
+      - "1883:1883"
       - "9001:9001"
     volumes:
       - ./mosquitto/config:/mosquitto/config
@@ -50,3 +54,5 @@ services:
       - ./mosquitto/log:/mosquitto/log
     security_opt:
       - no-new-privileges:true
+    networks:
+      - kidsapp-net
