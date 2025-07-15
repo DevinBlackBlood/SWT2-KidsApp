@@ -1,30 +1,43 @@
   <div class="search-container">
       <div class="search-box">
-        <input 
-          type="text" 
+        <input
+          type="text"
           [(ngModel)]="searchTerm"
 
           placeholder="Suche nach Events, Orten..."
           class="search-input">
-        <button 
-          class="search-button">
+        <button
+          class="search-button"
+        (click)="search()">
           🔍
         </button>
       </div>
-      
+
       <div class="search-options">
-        <button 
+        <button
           class="option-btn">
           📍 In der Nähe
         </button>
-        <button 
+        <button
 
           class="option-btn">
            Events
         </button>
-        <button 
+        <button
           class="option-btn">
           Spielplätze
         </button>
       </div>
+    @for (number of filteredDatasource.slice(0,3);track datasource ) {
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{number.veranstaltungName}}</mat-card-title>
+        <mat-card-subtitle>{{number.beschreibung}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button matButton style="margin-left: 16em">MEHR</button>
+      </mat-card-actions>
+    </mat-card>
+    }
     </div>
