@@ -16,13 +16,19 @@ import {Router} from "@angular/router";
   styleUrl: './navbar.css'
 })
 export class Navbar {
+navigateToLogin() {
+throw new Error('Method not implemented.');
+
+}
 
   constructor(private router:Router) {
   }
   user: boolean = true
+    
 
-  doRoute(url: string) {
+  doRoute(path: string) {
 
-    this.router.navigateByUrl(url)
+    this.router.navigate([path])
   }
+ 
 }

@@ -24,10 +24,10 @@
               <span>Ausloggen</span>
           </button>
           } @else {
-              <button mat-menu-item (click)="user = true">
-                  <mat-icon fontIcon="login" style="font-size: 25px">notifications_off</mat-icon>
-                  <span>Einloggen</span>
-              </button>
+              <button mat-menu-item (click)="doRoute('login')">
+    <mat-icon fontIcon="login" style="font-size: 25px">notifications_off</mat-icon>
+    <span>Einloggen</span>
+</button>
           }
       </mat-menu>
 

@@ -1,4 +1,4 @@
-// leaflet.component.ts - Angular 20+ Compatible
+// leaflet.component.ts - Angular 20+ Compatible with MarkerCluster
 import {
   Component,
   OnInit,
@@ -12,9 +12,11 @@ import {
 import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import * as L from 'leaflet';
+import 'leaflet.markercluster';
+
 import { MarkerService } from '../../marker.service';
 
-// Fix default marker icons for Angular 20+
+// Fix default marker icons
 const iconDefault = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -26,7 +28,6 @@ const iconDefault = L.icon({
   shadowSize: [41, 41]
 });
 
-// Set default icon globally
 L.Marker.prototype.options.icon = iconDefault;
 
 @Component({
@@ -46,7 +47,6 @@ L.Marker.prototype.options.icon = iconDefault;
       display: block;
       background: #f0f0f0;
     }
-
     .map-container {
       height: 100%;
       width: 100%;
@@ -66,18 +66,33 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
   private markers: L.Marker[] = [];
   private isMapReady = false;
   private destroyRef = inject(DestroyRef);
+  private markerClusterGroup!: L.MarkerClusterGroup;
 
   constructor(private markerService: MarkerService) {}
 
   ngOnInit() {
     this.setupMarkerSubscription();
+
+    // Testdaten: viele Marker
+    const coordsList: [number, number][] = [
+      [47.6062, -122.3321], // Seattle
+      [37.7749, -122.4194], // San Francisco
+      [40.7128, -74.0060],  // New York
+      [51.5074, -0.1278],   // London
+      [48.8566, 2.3522],    // Paris
+      [52.52, 13.405],      // Berlin
+      [55.7558, 37.6173],   // Moscow
+      [35.6895, 139.6917],  // Tokyo
+      [28.6139, 77.2090],   // Delhi
+      [34.0522, -118.2437]  // Los Angeles
+    ];
+
+    // Marker später laden, wenn Map bereit ist
+    setTimeout(() => this.addMultipleMarkers(coordsList), 1000);
   }
 
   ngAfterViewInit() {
-    // Use multiple timing strategies for Angular 20+
-    Promise.resolve().then(() => {
-      this.initializeMap();
-    });
+    Promise.resolve().then(() => this.initializeMap());
   }
 
   ngOnDestroy() {
@@ -87,73 +102,43 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
   private initializeMap() {
     try {
       const element = this.mapElement?.nativeElement;
-
       if (!element) {
-        console.error('Map element not available');
         setTimeout(() => this.initializeMap(), 100);
         return;
       }
 
-      // Clear any existing map instance
-      if (this.map) {
-        this.map.remove();
-      }
+      if (this.map) this.map.remove();
 
-      console.log('Initializing map on element:', element);
-
-      // Create map with explicit container reference
       this.map = L.map(element, {
-        center: [47.6062, -122.3321], // Seattle coordinates for better visibility
-        zoom: 10,
+        center: [47.6062, -122.3321],
+        zoom: 3,
         zoomControl: true,
         attributionControl: true,
         maxZoom: 18,
-        minZoom: 3
+        minZoom: 2
       });
 
-      // Add OpenStreetMap tiles
-      const tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
         maxZoom: 18,
         crossOrigin: true
-      });
+      }).addTo(this.map);
+      this.markerClusterGroup = new L.MarkerClusterGroup();
+      this.markerClusterGroup = L.markerClusterGroup();
+      this.map.addLayer(this.markerClusterGroup);
 
-      tileLayer.addTo(this.map);
-
-      // Handle map events
       this.map.on('load', () => {
         console.log('Map loaded successfully');
         this.isMapReady = true;
       });
 
-      this.map.on('resize', () => {
-        console.log('Map resized');
-      });
-
-      // Force map to recognize its size - critical for Angular 20+
       setTimeout(() => {
         if (this.map) {
           this.map.invalidateSize(true);
           this.isMapReady = true;
-          console.log('Map size invalidated and ready');
         }
       }, 100);
-
-      // Additional resize attempts for stubborn cases
-      setTimeout(() => {
-        if (this.map) {
-          this.map.invalidateSize(true);
-        }
-      }, 300);
-
-      setTimeout(() => {
-        if (this.map) {
-          this.map.invalidateSize(true);
-        }
-      }, 1000);
-
     } catch (error) {
-
       setTimeout(() => this.initializeMap(), 500);
     }
   }
@@ -162,7 +147,6 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
     this.markerService.coordsChange
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(coords => {
-        console.log('Received coordinates:', coords);
         this.handleNewCoordinates(coords);
       });
   }
@@ -170,64 +154,72 @@ export class Leaflet implements OnInit, AfterViewInit, OnDestroy {
   private handleNewCoordinates(coords: [number, number]) {
     if (!coords) return;
 
-    const addMarkerWhenReady = () => {
+    const tryAdd = () => {
       if (this.isMapReady && this.map) {
         this.addMarker(coords);
         this.map.setView(coords, this.map.getZoom());
       } else {
-        setTimeout(addMarkerWhenReady, 100);
+        setTimeout(tryAdd, 100);
       }
     };
 
-    addMarkerWhenReady();
+    tryAdd();
   }
 
   private addMarker(coords: [number, number]) {
     try {
       const marker = L.marker(coords, { icon: iconDefault })
-        .addTo(this.map)
         .bindPopup(`Location: ${coords[0].toFixed(4)}, ${coords[1].toFixed(4)}`)
         .openPopup();
 
+      this.markerClusterGroup.addLayer(marker);
       this.markers.push(marker);
-      console.log('Marker added at:', coords);
     } catch (error) {
       console.error('Failed to add marker:', error);
     }
   }
 
-  private cleanupMap() {
-    try {
-      if (this.map) {
-        this.map.remove();
-        this.map = null as any;
-      }
-      this.markers = [];
-      this.isMapReady = false;
-    } catch (error) {
-      console.error('Error cleaning up map:', error);
+  public addMultipleMarkers(coordsList: [number, number][]) {
+    if (!this.isMapReady || !this.map) {
+      setTimeout(() => this.addMultipleMarkers(coordsList), 100);
+      return;
     }
+
+    coordsList.forEach(coords => {
+      const marker = L.marker(coords, { icon: iconDefault })
+        .bindPopup(`Location: ${coords[0].toFixed(4)}, ${coords[1].toFixed(4)}`);
+
+      this.markerClusterGroup.addLayer(marker);
+      this.markers.push(marker);
+    });
+
+    console.log(`${coordsList.length} markers added.`);
   }
 
-  // Public methods
   public clearAllMarkers() {
-    this.markers.forEach(marker => {
-      if (this.map) {
-        this.map.removeLayer(marker);
-      }
-    });
+    this.markerClusterGroup.clearLayers();
     this.markers = [];
   }
 
   public resizeMap() {
     if (this.map) {
-      setTimeout(() => {
-        this.map.invalidateSize(true);
-      }, 100);
+      setTimeout(() => this.map.invalidateSize(true), 100);
     }
   }
 
   public getCurrentBounds() {
     return this.map?.getBounds();
+  }
+
+  private cleanupMap() {
+    if (this.map) {
+      this.map.remove();
+      this.map = null as any;
+    }
+    if (this.markerClusterGroup) {
+      this.markerClusterGroup.clearLayers();
+    }
+    this.markers = [];
+    this.isMapReady = false;
   }
 }
