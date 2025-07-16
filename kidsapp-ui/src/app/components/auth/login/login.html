@@ -39,7 +39,7 @@
       class="login-button"
       [disabled]="loginForm.invalid || isLoading"
       [class.loading]="isLoading">
-      <span *ngIf="!isLoading">Login</span>
+      <span *ngIf="!isLoading" (click)="navigateToProfile()">Login</span>
       <span *ngIf="isLoading">
         <span class="spinner"></span> Logging in...
       </span>
@@ -47,7 +47,7 @@
 
     <div class="footer-links">
       <a (click)="navigateToRegister()">Create an account</a>
-      <a routerLink="/forgot-password">Forgot password?</a>
+      <a (click)="navigateToForgotPassword()">Forgot password?</a>
     </div>
   </form>
 </div>

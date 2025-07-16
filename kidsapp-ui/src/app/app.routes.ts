@@ -13,11 +13,15 @@ import {UserEventVerwaltungComponent} from './components/user-event-verwaltung/u
 import { Login } from './components/auth/login/login';
 import { Register } from './components/auth/register/register';
 import { NgModule } from '@angular/core';
-
+import { Profile } from './components/auth/profile/profile';
+import { ForgotPassword } from './forgot-password/forgot-password';
 
 export const routes: Routes = [
   { path: 'leaflet', component: Leaflet },
    { path: 'test', component: Another },
+   {
+  path: 'profile',
+  component: Profile},
   { path: '', component: Welcome },
    { path: 'register', component: Register },
   { path: 'home', component: Home },
@@ -30,6 +34,7 @@ export const routes: Routes = [
   { path: 'veranstaltung/verwaltung', component: VeranstaltungVerwaltung },
   { path: 'rechnungen/verwaltung', component: RechungVerwaltung },
   { path: 'antraege/verwaltung', component: AntraegeVerwaltung },
+  { path: 'forgot-password', component: ForgotPassword }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

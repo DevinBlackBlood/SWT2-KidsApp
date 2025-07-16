@@ -3,14 +3,17 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth';
 import { CommonModule } from '@angular/common';
+import { f } from "../../../../../node_modules/@angular/material/icon-module.d-COXCrhrh";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+       MatIconModule,
+],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -65,4 +68,10 @@ errorMessage: any;
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
+  navigateToForgotPassword() {
+  this.router.navigate(['/forgot-password']);
+}
 }
