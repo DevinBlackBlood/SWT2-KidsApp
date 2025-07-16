@@ -1,5 +1,7 @@
 package com.swt1.bs;
 
+import com.swt1.bs.repository.VeranstaltungRepository;
+import com.swt1.bs.service.VeranstaltungService;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +29,8 @@ import java.util.UUID;
 @Configuration
 public class MqttBeans {
 
+    @Autowired
+    VeranstaltungService veranstaltungService;
 
     @Bean
     public MqttPahoClientFactory mqttClientFactory() {
@@ -53,7 +57,7 @@ public class MqttBeans {
     @Bean
     public MessageProducer inbound() {
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
-                "kidsapp-client", mqttClientFactory(), "kidsapp-to-api",  "api-to-kidsapp");
+                "kidsapp-client", mqttClientFactory(), "api-to-kidsapp");
 
         adapter.setCompletionTimeout(5000);
         adapter.setConverter(new DefaultPahoMessageConverter());
@@ -68,38 +72,9 @@ public class MqttBeans {
         return new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
-                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                if (topic.equals("kidsapp-to-api")) {
-                    System.out.println("This is my topic");
-                }
-                System.out.println("MQTT empfangen!!!!!!!!!!!!!!!!!!!!!!!!!: " + message.getPayload());
-
-                System.out.println(message.getPayload());
+                System.out.println(message.getPayload().toString());
+                veranstaltungService.verarbeiteNachricht(message.getPayload().toString());
             }
         };
-    }
-
-    @Bean
-    @Lazy
-    public MessageChannel mqttOutboundChannel() {
-        return new DirectChannel();
-    }
-
-    @Bean
-    @ServiceActivator(inputChannel = "mqttOutboundChannel")
-    public MessageHandler mqttOutbound() {
-        MqttPahoMessageHandler handler = new MqttPahoMessageHandler("kidsapp-outbound-client" + UUID.randomUUID(), mqttClientFactory());
-
-        handler.setAsync(true);
-        handler.setDefaultTopic("kidsapp-to-api");
-        return handler;
-    }
-
-    public void sendeNachricht(String payload) {
-        Message<String> message = MessageBuilder.withPayload(payload)
-                .setHeader(MqttHeaders.TOPIC, "kidsapp-to-api")  // ggf. dynamisch setzen
-                .build();
-
-        mqttOutboundChannel().send(message);
     }
 }

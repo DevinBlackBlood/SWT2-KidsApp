@@ -1,5 +1,8 @@
 <div class="container">
   <h2>Event verwaltung</h2>
+  <button style="margin-top: 10px; margin-bottom: 10px" (click)="switchEventsToFavorites()" mat-raised-button>
+    {{ showFavoritesOnly ? 'Alle Veranstaltungen' : 'Favoriten' }}
+  </button>
   <div class="card-container">
     @if (veranstaltungen.length > 0) {
       @for (Veranstaltung of veranstaltungen; track Veranstaltung.id) {
@@ -7,13 +10,17 @@
           <mat-card-header>
             <div mat-card-avatar (click)="navigate('/veranstalter')" class="header-image"></div>
             <mat-card-title (click)="navigate('/veranstalter')">{{ Veranstaltung.veranstaltungName }}</mat-card-title>
-            <mat-card-subtitle>{{Veranstaltung.veranstalter}}</mat-card-subtitle>
+            <mat-card-subtitle>{{ Veranstaltung.veranstalter?.veranstalterName }}</mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image (click)="openDetails(Veranstaltung)" src="Event-temp.png" alt="Event" height="250" width="400">
+          <img mat-card-image (click)="openDetails(Veranstaltung)" src="Event-temp.png" alt="Event" height="250"
+               width="400">
           <mat-card-content>
-            <p>{{Veranstaltung.beschreibung}}</p>
+            <p>{{ Veranstaltung.beschreibung }}</p>
           </mat-card-content>
           <mat-card-actions>
+            <button matButton (click)="checkIsFavorite(Veranstaltung) ? unfavorite(Veranstaltung.id ?? 0) : favorite(Veranstaltung.id ?? 0)">
+              {{ checkIsFavorite(Veranstaltung) ? 'Entfavorisieren' : 'Favorisieren' }}
+            </button>
             <button matButton (click)="cancelBooking(Veranstaltung.id)">Stornieren</button>
           </mat-card-actions>
         </mat-card>

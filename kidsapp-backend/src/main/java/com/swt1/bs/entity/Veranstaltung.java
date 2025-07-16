@@ -1,5 +1,9 @@
 package com.swt1.bs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.swt1.bs.utils.Adresse;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
@@ -28,9 +32,13 @@ public class Veranstaltung {
     @ManyToOne(fetch = FetchType.EAGER)
     private Veranstalter veranstalter;
 
-    @OneToMany(targetEntity = Benutzer.class)
+    @ManyToMany(targetEntity = Benutzer.class)
     @Nullable
+    @JsonIgnoreProperties("favoriten")
+    @JoinTable(
+            name = "veranstaltung_benutzer",
+            joinColumns = @JoinColumn(name = "veranstaltung_id"),
+            inverseJoinColumns = @JoinColumn(name = "benutzer_id")
+    )
     private List<Benutzer> benutzer;
-
-
 }

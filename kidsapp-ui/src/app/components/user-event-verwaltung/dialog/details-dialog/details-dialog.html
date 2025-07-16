@@ -23,10 +23,13 @@
           <span matListItemTitle>Veranstalter</span>
         </mat-list-item>
         <mat-list-item>
-          <span matListItemLine>Veran Adresse</span>
+          <span matListItemLine>{{data?.veranstalter?.veranstalterName}}</span>
         </mat-list-item>
+          <mat-list-item>
+            <span matListItemLine>{{data?.veranstalter?.telefonnummer}}</span>
+          </mat-list-item>
         <mat-list-item>
-          <span matListItemLine>Veran Kontakt</span>
+          <span matListItemLine>{{data?.veranstalter?.email}}</span>
         </mat-list-item>
       </mat-list>
     </div>
