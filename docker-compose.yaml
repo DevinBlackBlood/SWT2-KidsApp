@@ -3,7 +3,7 @@ networks:
 
 services:
   kidsapp-backend:
-    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:dcb223d16d7d3b6fe2200484e989a0e2a08ed0a3
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-backend:1536936790a4ce66854e8ef8c907e80bc9fd901a
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/kidsapp
       SPRING_DATASOURCE_USERNAME: postgres
@@ -16,13 +16,13 @@ services:
     networks:
       - kidsapp-net
   api-backend:
-    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:dcb223d16d7d3b6fe2200484e989a0e2a08ed0a3
+    image: ghcr.io/devinblackblood/swt2-kidsapp/api-backend:1536936790a4ce66854e8ef8c907e80bc9fd901a
     ports:
       - "8081:8081"
     networks:
       - kidsapp-net
   kidsapp-ui:
-    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:dcb223d16d7d3b6fe2200484e989a0e2a08ed0a3
+    image: ghcr.io/devinblackblood/swt2-kidsapp/kidsapp-ui:1536936790a4ce66854e8ef8c907e80bc9fd901a
     ports:
         - "80:80"
     networks:
