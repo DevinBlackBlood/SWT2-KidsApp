@@ -1,5 +1,6 @@
     package com.swt1.bs.entity;
 
+    import com.fasterxml.jackson.annotation.JsonIgnore;
     import com.swt1.bs.utils.Adresse;
     import jakarta.persistence.*;
     import lombok.AllArgsConstructor;
@@ -48,6 +49,7 @@
         private List<Chat> chats;
 
         @ManyToMany(targetEntity = Veranstaltung.class)
+        @JsonIgnore
         private List<Veranstaltung> favoriten;
 
         public void addFavorite(Veranstaltung v) {

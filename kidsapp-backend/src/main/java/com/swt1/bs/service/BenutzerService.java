@@ -78,4 +78,15 @@ public class BenutzerService {
     public List<Veranstaltung> getFavorites(Long userId) {
         return benutzerRepository.findById(userId).get().getFavoriten();
     }
+
+    public void entferneFavorit(Long benutzerId, Long veranstaltungId) {
+        Benutzer benutzer = benutzerRepository.findById(benutzerId)
+                .orElseThrow(() -> new EntityNotFoundException("Benutzer nicht gefunden"));
+
+        Veranstaltung veranstaltung = veranstaltungRepository.findById(veranstaltungId)
+                .orElseThrow(() -> new EntityNotFoundException("Veranstaltung nicht gefunden"));
+
+        benutzer.getFavoriten().remove(veranstaltung);
+        benutzerRepository.save(benutzer);
+    }
 }

@@ -8,7 +8,6 @@
  * Do not edit the class manually.
  */
 import { Adresse } from './adresse';
-import { Veranstaltung } from './veranstaltung';
 import { Ticket } from './ticket';
 import { Nachricht } from './nachricht';
 import { Chat } from './chat';
@@ -28,6 +27,5 @@ export interface Benutzer {
     tickets?: Array<Ticket>;
     nachrichten?: Array<Nachricht>;
     chats?: Array<Chat>;
-    favoriten?: Array<Veranstaltung>;
 }
 

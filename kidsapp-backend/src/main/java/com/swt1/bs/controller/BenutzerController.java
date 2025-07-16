@@ -27,12 +27,12 @@ public class BenutzerController {
     }
 
     @PostMapping("/{benutzerId}/favorit/{veranstaltungId}")
-    public ResponseEntity<String> fuegeFavoritHinzu(
-            @PathVariable Long benutzerId,
-            @PathVariable Long veranstaltungId
-    ) {
+    public void fuegeFavoritHinzu(@PathVariable Long benutzerId, @PathVariable Long veranstaltungId) {
         benutzerService.addFavoriteToUser(benutzerId, veranstaltungId);
-        return ResponseEntity.ok("Veranstaltung zu Favoriten hinzugefügt");
+    }
+    @DeleteMapping("/{benutzerId}/favoriten/{veranstaltungId}")
+    public void entferneFavorit(@PathVariable Long benutzerId, @PathVariable Long veranstaltungId) {
+        benutzerService.entferneFavorit(benutzerId, veranstaltungId);
     }
 
     @GetMapping("/hallo")

@@ -72,26 +72,9 @@ public class MqttBeans {
         return new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {
-//                String topic = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString();
-                System.err.println(message.getPayload().toString());
+                System.out.println(message.getPayload().toString());
                 veranstaltungService.verarbeiteNachricht(message.getPayload().toString());
             }
         };
-    }
-
-    @Bean
-    @Lazy
-    public MessageChannel mqttOutboundChannel() {
-        return new DirectChannel();
-    }
-
-    @Bean
-    @ServiceActivator(inputChannel = "mqttOutboundChannel")
-    public MessageHandler mqttOutbound() {
-        MqttPahoMessageHandler handler = new MqttPahoMessageHandler("kidsapp-outbound-client" + UUID.randomUUID(), mqttClientFactory());
-
-        handler.setAsync(true);
-        handler.setDefaultTopic("api-to-kidsapp");
-        return handler;
     }
 }

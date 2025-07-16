@@ -13,6 +13,7 @@ export class Welcome {
   constructor(public router: Router) {}
 
     doRoute(url: string){
+      console.log("cheack")
       this.router.navigateByUrl(url)
     }
 }

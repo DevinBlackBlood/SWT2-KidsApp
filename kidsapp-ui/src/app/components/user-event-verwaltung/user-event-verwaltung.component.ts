@@ -19,6 +19,8 @@ import {
 } from '../../../../src-gen/bsclient';
 import {ConfirmDialog} from './dialog/confirm-dialog/confirm-dialog';
 import {DetailsDialog} from './dialog/details-dialog/details-dialog';
+import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-user-event-verwaltung',
@@ -40,14 +42,19 @@ import {DetailsDialog} from './dialog/details-dialog/details-dialog';
 export class UserEventVerwaltungComponent implements OnInit {
 
   veranstaltungen: Veranstaltung[] = [];
+  favoriteVeranstaltungen: Veranstaltung[] = [];
+  allVeranstaltungen: Veranstaltung[] = [];
+
+  showFavoritesOnly = false;
+
   veranstalter: Veranstalter[] = [];
-  favoriten: Veranstaltung[] = [];
+  favoriteIds = new Set<number>();
 
   userId: number = 0;
 
   readonly dialog = inject(MatDialog);
 
-  constructor(public router: Router, public benutzerService: BenutzerControllerService,public veranstaltungService: VeranstaltungControllerService, private route: ActivatedRoute) {
+  constructor(public router: Router, public benutzerService: BenutzerControllerService, public veranstaltungService: VeranstaltungControllerService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -57,38 +64,75 @@ export class UserEventVerwaltungComponent implements OnInit {
   dataInit() {
     this.route.paramMap.subscribe(params => {
       this.userId = Number(this.route.snapshot.paramMap.get('id'));
-      this.veranstaltungService.getVeranstaltungenForUser(this.userId).subscribe(data => {
-        this.veranstaltungen = data;
-        this.veranstaltungen = [...this.veranstaltungen]
-      })
-    })
+
+      this.veranstaltungService.getVeranstaltungenForUser(this.userId).subscribe(veranstaltungen => {
+        this.allVeranstaltungen = veranstaltungen;
+
+        this.benutzerService.getFavoritesForUser(this.userId).subscribe(favorites => {
+          this.favoriteIds = new Set(favorites.map(f => f.id!).filter(Boolean));
+
+          this.favoriteVeranstaltungen = this.allVeranstaltungen.filter(v =>
+            v.id !== undefined && this.favoriteIds.has(v.id)
+          );
+
+          this.updateVeranstaltungen();
+        });
+      });
+    });
   }
 
-  favorite(favoriteId: number) {
-    let dialogRef = this.dialog.open(ConfirmDialog);
-    let favId: number = favoriteId;
+  unfavorite(favoriteId: number) {
+    const dialogRef = this.dialog.open(ConfirmDialog);
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
-        if (this.userId != null && favId != null) {
-          this.benutzerService.fuegeFavoritHinzu(this.userId, favoriteId)
-            .subscribe({
-              next: () => console.log("Erfolgreich hinzugefügt"),
-              error: err => console.error("Fehler beim Hinzufügen:", err)
-            });
-        }
+      if (res) {
+        this.benutzerService.entferneFavorit(this.userId, favoriteId).subscribe({
+          next: () => {
+            this.favoriteIds.delete(favoriteId);
+            this.favoriteVeranstaltungen = this.favoriteVeranstaltungen.filter(v => v.id !== favoriteId);
+            this.updateVeranstaltungen();
+            console.log("Entfavorisiert");
+          },
+          error: err => console.error("Fehler beim Entfernen:", err)
+        });
       }
-    })
+    });
   }
 
 
-  cancelBooking(id: number | undefined) {
-    let dialogRef = this.dialog.open(ConfirmDialog);
-    let veranstaltungId = 11;
+  checkIsFavorite(veranstaltung: Veranstaltung): boolean {
+    return veranstaltung.id !== undefined && this.favoriteIds.has(veranstaltung.id);
+  }
+
+
+  favorite(id: number) {
+    this.benutzerService.fuegeFavoritHinzu(this.userId, id).subscribe(() => {
+      this.favoriteIds.add(id);
+      const event = this.allVeranstaltungen.find(v => v.id === id);
+      if (event && !this.favoriteVeranstaltungen.some(v => v.id === id)) {
+        this.favoriteVeranstaltungen.push(event);
+      }
+      this.updateVeranstaltungen();
+    });
+  }
+
+  updateVeranstaltungen() {
+    this.veranstaltungen = this.showFavoritesOnly
+      ? [...this.favoriteVeranstaltungen]
+      : [...this.allVeranstaltungen];
+  }
+
+  cancelBooking(veranstaltungId: number | undefined) {
+    if (!veranstaltungId) return;
+
+    const dialogRef = this.dialog.open(ConfirmDialog);
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.veranstaltungService.deleteVeranstaltungForUser(veranstaltungId, this.userId).subscribe({
+        this.veranstaltungService.deleteVeranstaltungForUser(this.userId, veranstaltungId).subscribe({
           next: () => {
             this.veranstaltungen = this.veranstaltungen.filter(v => v.id !== veranstaltungId);
+            this.favoriteIds.delete(veranstaltungId);
+            this.favoriteVeranstaltungen = this.favoriteVeranstaltungen.filter(v => v.id !== veranstaltungId);
           },
           error: (err) => {
             console.error('Fehler beim Stornieren:', err);
@@ -98,18 +142,24 @@ export class UserEventVerwaltungComponent implements OnInit {
     });
   }
 
-  navigate(url: string) {
+  navigate(url
+           :
+           string
+  ) {
     this.router.navigateByUrl(url);
   }
 
-  openDetails(veranstaltung: Veranstaltung) {
+  openDetails(veranstaltung
+              :
+              Veranstaltung
+  ) {
     this.dialog.open(DetailsDialog, {data: veranstaltung});
   }
 
-  switchEventsToFavorites(veranstaltungen: Veranstaltung[]) {
-    this.benutzerService.getFavoritesForUser(this.userId).subscribe(favs => {
-      this.veranstaltungen = favs;
-      this.veranstaltungen = [...this.veranstaltungen];
-    });
+
+  switchEventsToFavorites() {
+    this.showFavoritesOnly = !this.showFavoritesOnly;
+    this.updateVeranstaltungen();
   }
+
 }

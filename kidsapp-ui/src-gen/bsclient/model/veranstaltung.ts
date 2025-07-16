@@ -20,6 +20,5 @@ export interface Veranstaltung {
     veranstaltungName?: string;
     veranstalter?: Veranstalter;
     benutzer?: Array<Benutzer>;
-    favorisiertVon?: Array<Benutzer>;
 }
 
