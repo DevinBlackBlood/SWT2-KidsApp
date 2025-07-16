@@ -31,6 +31,25 @@
           }
       </mat-menu>
 
-    <mat-icon aria-hidden="true" fontIcon="menu"></mat-icon>
+
+    <button style="background-color: white; border: none" [matMenuTriggerFor]="nav">
+      <mat-icon aria-hidden="true" class="admin-card" fontIcon="menu"></mat-icon>
+    </button>
+    <mat-menu #nav="matMenu">
+      <button mat-menu-item (click)="doRoute('/home')" >
+        <mat-icon fontIcon="home" style="font-size: 25px"></mat-icon>
+        <span>Home</span>
+      </button>
+      <button mat-menu-item [disabled]="!user" (click)="doRoute('/user/1/events/veranstaltung')">
+        <mat-icon fontIcon="event" style="font-size: 25px"></mat-icon>
+        <span>Veranstaltungen verwalten</span>
+      </button>
+      @if (user){
+        <button mat-menu-item (click)="doRoute('/admin')">
+          <mat-icon fontIcon="admin_panel_settings" style="font-size: 25px">notifications_off</mat-icon>
+          <span>Admin</span>
+        </button>
+      }
+    </mat-menu>
   </div>
 </div>

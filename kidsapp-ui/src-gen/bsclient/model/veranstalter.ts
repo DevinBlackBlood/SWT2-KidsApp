@@ -17,7 +17,7 @@ export interface Veranstalter {
     veranstalterName?: string;
     email?: string;
     telefonnummer?: string;
-    ansprechpersonen?: Array<Benutzer>;
     mitglieder?: Array<Benutzer>;
+    ansprechpersonen?: Array<Benutzer>;
 }
 
