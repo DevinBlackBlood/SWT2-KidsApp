@@ -4,6 +4,7 @@ import com.swt1.bs.Gateway;
 import com.swt1.bs.MqttBeans;
 import com.swt1.bs.entity.Veranstaltung;
 import com.swt1.bs.repository.VeranstaltungRepository;
+import com.swt1.bs.service.VeranstaltungService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ import java.util.Optional;
 public class VeranstaltungController {
 
     @Autowired
-    private VeranstaltungRepository veranstaltungRepository;
+    private VeranstaltungService veranstaltungService;
 
     @Autowired
     private Gateway gateway;
@@ -23,39 +24,28 @@ public class VeranstaltungController {
     @GetMapping("veranstaltungen")
     public List<Veranstaltung> veranstaltungen() {
 
-        return (List<Veranstaltung>) veranstaltungRepository.findAll();
+        return (List<Veranstaltung>) veranstaltungService.findAll();
     }
 
     @GetMapping("/loeschen/veranstaltung")
     public boolean loeschenVeranstaltung(Long id) {
-        Optional<Veranstaltung> v = veranstaltungRepository.findById(id);
-
-        if(v.isPresent()) {
-            veranstaltungRepository.delete(v.get());
-            return true;
-        }
-        return false;
+        return veranstaltungService.loeschenVeranstaltung(id);
     }
 
     @GetMapping("/speichern/veranstaltung")
     public Veranstaltung speichernVeranstaltung(Veranstaltung newVeranstaltung) {
 
-        if (veranstaltungRepository.findById(newVeranstaltung.getId()).isPresent()){
-
-            return  veranstaltungRepository.save(newVeranstaltung);
-        }
-
-        return null;
+       return veranstaltungService.speichernVeranstaltung(newVeranstaltung);
     }
 
     @GetMapping("veranstaltungen/user/{id}")
     public List<Veranstaltung> getVeranstaltungenForUser(@PathVariable Long id) {
-        return veranstaltungRepository.findVeranstaltungenForUser(id);
+        return veranstaltungService.getVeranstaltungenForUser(id);
     }
 
     @GetMapping("veranstaltung/{eventId}/delete/user/{userId}/")
     public void deleteVeranstaltungForUser(@PathVariable Long userId, @PathVariable Long eventId) {
-        veranstaltungRepository.deleteVeranstaltungForUser(userId, eventId);
+        veranstaltungService.deleteVeranstaltungForUser(userId, eventId);
     }
 
     @GetMapping("/test")
@@ -65,6 +55,9 @@ public class VeranstaltungController {
         return "Nachricht gesendet!";
     }
 
-
+@GetMapping("veranstaltungen/status/{status}")
+    public List<Veranstaltung> getVeranstaltungenByStatus(@PathVariable String status) {
+        return veranstaltungService.getVeranstaltungenByStatus(status);
+    }
 
 }
